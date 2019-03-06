@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nzh.Hero.Core.DbContext
 {
-    public class SqlDbContext :IsqlDbContext, IDisposable
+    public class SqlDbContext :ISqlDbContext, IDisposable
     {
         public SqlSugarClient _db;
         ///private static string ConnectionString = String.Empty;

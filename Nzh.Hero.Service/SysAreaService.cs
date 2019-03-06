@@ -13,7 +13,7 @@ namespace Nzh.Hero.Service
 {
     public class SysAreaService:BaseService
     {
-        public SysAreaService(IsqlDbContext sqldb)
+        public SysAreaService(ISqlDbContext sqldb)
             : base(sqldb)
         {
 

@@ -16,7 +16,7 @@ namespace Nzh.Hero.Service
 {
     public class SysMenuService:BaseService
     {
-        public SysMenuService(IsqlDbContext sqlContext)
+        public SysMenuService(ISqlDbContext sqlContext)
            : base(sqlContext)
         {
 

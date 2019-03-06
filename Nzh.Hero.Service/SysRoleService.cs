@@ -15,7 +15,7 @@ namespace Nzh.Hero.Service
 {
     public class SysRoleService: BaseService
     {
-        public SysRoleService(IsqlDbContext sqldb)
+        public SysRoleService(ISqlDbContext sqldb)
        : base(sqldb)
         {
 

@@ -11,7 +11,7 @@ namespace Nzh.Hero.Service
 {
     public class SysDicService :BaseService
     {
-        public SysDicService(IsqlDbContext sqldb)
+        public SysDicService(ISqlDbContext sqldb)
            : base(sqldb)
         {
 

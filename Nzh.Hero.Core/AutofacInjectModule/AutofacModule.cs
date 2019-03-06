@@ -12,12 +12,12 @@ namespace Nzh.Hero.Core.AutofacInjectModule
         protected override void Load(ContainerBuilder builder)
         {
             //领养AppService注入
-            builder.RegisterAssemblyTypes(Assembly.Load("Altas.Framework.AppService"))
-                .Where(t => t.Name.EndsWith("AppService")).AsSelf().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(Assembly.Load("Nzh.Hero.Service"))
+                .Where(t => t.Name.EndsWith("Service")).AsSelf().InstancePerLifetimeScope();
             //api服务注入
 
             //dbcontext注入
-            builder.RegisterType<SqlDbContext>().As<IsqlDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<SqlDbContext>().As<ISqlDbContext>().InstancePerLifetimeScope();
         }
     }
 }
