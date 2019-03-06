@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.Common.Security;
 using Nzh.Hero.Core.Web;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
@@ -16,9 +17,9 @@ namespace Nzh.Hero.Controllers.Admin
 {
     public class SysUserController : BaseController
     {
-        private readonly SysUserService _userService;
+        private readonly ISysUserService _userService;
 
-        public SysUserController(SysUserService userService)
+        public SysUserController(ISysUserService userService)
         {
             _userService = userService;
         }

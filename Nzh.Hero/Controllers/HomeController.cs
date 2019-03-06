@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.Core.Web;
+using Nzh.Hero.IService;
 using Nzh.Hero.Models;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.SystemDto;
@@ -14,9 +15,9 @@ namespace Nzh.Hero.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly SysMenuService _menuService;
+        private readonly ISysMenuService _menuService;
 
-        public HomeController(SysMenuService menuService)
+        public HomeController(ISysMenuService menuService)
         {
             _menuService = menuService;
         }

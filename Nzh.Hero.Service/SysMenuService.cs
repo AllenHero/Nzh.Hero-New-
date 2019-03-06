@@ -1,6 +1,7 @@
 ﻿using Nzh.Hero.Common.Extends;
 using Nzh.Hero.Common.Snowflake;
 using Nzh.Hero.Core.DbContext;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service.Base;
 using Nzh.Hero.ViewModel.Common;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Nzh.Hero.Service
 {
-    public class SysMenuService:BaseService
+    public class SysMenuService:BaseService , ISysMenuService
     {
         public SysMenuService(ISqlDbContext sqlContext)
            : base(sqlContext)

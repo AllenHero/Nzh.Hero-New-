@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Nzh.Hero.Common.Extends;
 using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.Core.Web;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
@@ -16,9 +17,9 @@ namespace Nzh.Hero.Controllers.Admin
 {
     public class SysDicController : BaseController
     {
-        private readonly SysDicService _dicService;
+        private readonly ISysDicService _dicService;
 
-        public SysDicController(SysDicService dicService)
+        public SysDicController(ISysDicService dicService)
         {
             _dicService = dicService;
         }

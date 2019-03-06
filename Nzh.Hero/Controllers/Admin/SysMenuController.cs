@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Nzh.Hero.Common.JsonExt;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.SystemDto;
@@ -13,9 +14,9 @@ namespace Nzh.Hero.Controllers.Admin
 {
     public class SysMenuController : BaseController
     {
-        private SysMenuService _menuService;
+        private readonly ISysMenuService _menuService;
 
-        public SysMenuController(SysMenuService menuService)
+        public SysMenuController(ISysMenuService menuService)
         {
             _menuService = menuService;
         }

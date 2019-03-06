@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nzh.Hero.Common.JsonExt;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
@@ -13,9 +14,9 @@ namespace Nzh.Hero.Controllers.Admin
 {
     public class SysFuncController : BaseController
     {
-        private readonly SysFuncService _funcService;
+        private readonly ISysFuncService _funcService;
 
-        public SysFuncController(SysFuncService funcService)
+        public SysFuncController(ISysFuncService funcService)
         {
             _funcService = funcService;
         }

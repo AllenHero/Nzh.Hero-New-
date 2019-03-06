@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Nzh.Hero.Core\Nzh.Hero.Core.csproj" />
+    <ProjectReference Include="..\Nzh.Hero.Model\Nzh.Hero.Model.csproj" />
+    <ProjectReference Include="..\Nzh.Hero.ViewModel\Nzh.Hero.ViewModel.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Nzh.Hero.Common.Snowflake;
 using Nzh.Hero.Core.DbContext;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service.Base;
 using Nzh.Hero.ViewModel.Common;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace Nzh.Hero.Service
 {
-    public class SysDicService :BaseService
+    public class SysDicService :BaseService , ISysDicService
     {
         public SysDicService(ISqlDbContext sqldb)
            : base(sqldb)

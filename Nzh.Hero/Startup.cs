@@ -16,6 +16,8 @@ using Nzh.Hero.Common.NLog;
 using Nzh.Hero.Core.AutofacInjectModule;
 using Nzh.Hero.Core.DbContext;
 using Nzh.Hero.Core.Web;
+using Nzh.Hero.IService;
+using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
 using StackExchange.Redis;
 
@@ -62,6 +64,14 @@ namespace Nzh.Hero
             hgOpts.Password = redisPwd;
 
             #endregion
+
+            services.AddTransient<ISysUserService, SysUserService>();
+            services.AddTransient<ISysAreaService, SysAreaService>();
+            services.AddTransient<ISysDicService, SysDicService>();
+            services.AddTransient<ISysFuncService, SysFuncService>();
+            services.AddTransient<ISysMenuService, SysMenuService>();
+            services.AddTransient<ISysRoleService, SysRoleService>();
+            services.AddTransient<ISysUserService, SysUserService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

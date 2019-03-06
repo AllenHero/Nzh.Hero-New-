@@ -1,4 +1,5 @@
 ﻿using Nzh.Hero.Core.DbContext;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service.Base;
 using Nzh.Hero.ViewModel.Common;
@@ -11,7 +12,7 @@ using System.Text;
 
 namespace Nzh.Hero.Service
 {
-    public class SysAreaService:BaseService
+    public class SysAreaService:BaseService, ISysAreaService
     {
         public SysAreaService(ISqlDbContext sqldb)
             : base(sqldb)
@@ -96,7 +97,7 @@ namespace Nzh.Hero.Service
             return data;
         }
 
-        private void InitChildList(List<CitySelDto> list, CitySelDto node, long pId)
+        public void InitChildList(List<CitySelDto> list, CitySelDto node, long pId)
         {
 
             var parentList = list.Where(s => s.ParentId == pId).ToList();

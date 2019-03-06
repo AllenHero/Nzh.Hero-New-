@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.Common.NLog;
 using Nzh.Hero.Core.Web;
+using Nzh.Hero.IService;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.SystemDto;
 
@@ -14,9 +15,9 @@ namespace Nzh.Hero.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly SysUserService _userService;
+        private readonly ISysUserService _userService;
 
-        public LoginController(SysUserService userService)
+        public LoginController(ISysUserService userService)
         {
             _userService = userService;
         }

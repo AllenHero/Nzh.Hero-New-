@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nzh.Hero.Common.Extends;
 using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.Core.Web;
+using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
@@ -15,9 +16,9 @@ namespace Nzh.Hero.Controllers.Admin
 {
     public class SysAreaController : BaseController
     {
-        private readonly SysAreaService _areaService;
+        private readonly ISysAreaService _areaService;
 
-        public SysAreaController(SysAreaService areaService)
+        public SysAreaController(ISysAreaService areaService)
         {
             _areaService = areaService;
         }
