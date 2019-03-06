@@ -12,10 +12,10 @@ namespace Nzh.Hero.Service.Base
     {
         protected readonly SqlSugarClient Sqldb;
 
-        private readonly IDbContext iSqlContext;
+        private readonly IsqlDbContext iSqlContext;
 
         protected LoginUserDto UserCookie;
-        public BaseService(IDbContext sqlContext)
+        public BaseService(IsqlDbContext sqlContext)
         {
             UserCookie = GetUserCookie();
             iSqlContext = sqlContext;

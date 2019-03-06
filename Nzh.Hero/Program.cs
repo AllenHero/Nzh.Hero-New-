@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Alexinea.Autofac.Extensions.DependencyInjection;
 
 namespace Nzh.Hero
 {
@@ -14,12 +15,21 @@ namespace Nzh.Hero
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            // BuildWebHost(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        //public static IWebHost BuildWebHost(string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args)
+        //        .UseStartup<Startup>()
+        //        .Build();
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+           WebHost.CreateDefaultBuilder(args)
+               .UseKestrel()
+               .UseIISIntegration()
+               .ConfigureServices(services => services.AddAutofac())
+               .UseStartup<Startup>()
+               .UseStartup<Startup>();
     }
 }

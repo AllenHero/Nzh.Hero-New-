@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nzh.Hero.Core.DbContext
 {
-    public interface IDbContext
+    public interface IsqlDbContext
     {
         SqlSugarClient DbInstance();
     }

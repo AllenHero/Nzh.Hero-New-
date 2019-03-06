@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nzh.Hero.Common.JsonExt;
+using Nzh.Hero.Core.Web;
 
 namespace Nzh.Hero.Controllers.Admin
 {
+    [AuthorizeFilter]
+    [WebExceptionFilter]
     public class BaseController : Controller
     {
         protected virtual ContentResult Success(string msg)
