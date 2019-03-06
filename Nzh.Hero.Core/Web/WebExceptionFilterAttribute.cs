@@ -17,9 +17,7 @@ namespace Nzh.Hero.Core.Web
         {
             var ex = context.Exception;
             LogNHelper.Exception(ex);
-            // 构建错误信息对象
             var result = new { statusCode = 300, msg = "服务内部异常,请联系管理员" };
-            // 设置结果
             context.Result = new ContentResult
             {
                 Content = result.ToJson(),
@@ -35,10 +33,6 @@ namespace Nzh.Hero.Core.Web
             return Task.CompletedTask;
         }
     }
-
-    /// <summary>
-    /// 在Startup里注册全局异常处理
-    /// </summary>
     public class WebExceptionFilter : IExceptionFilter, IAsyncExceptionFilter, IFilterMetadata
     {
         public void OnException(ExceptionContext context)
@@ -54,7 +48,7 @@ namespace Nzh.Hero.Core.Web
                     ContentType = "text/html;charset=utf-8"
                 };
             }
-            context.ExceptionHandled = true; //异常已处理了
+            context.ExceptionHandled = true; 
         }
 
         public Task OnExceptionAsync(ExceptionContext context)

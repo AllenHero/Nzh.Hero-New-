@@ -24,7 +24,6 @@ namespace Nzh.Hero.Service
 
         public List<sys_menu> GetMenuList(BootstrapGridDto param)
         {
-            //int total = 0;
             var query = Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).ToList();
             return query;
         }
@@ -42,7 +41,6 @@ namespace Nzh.Hero.Service
             dto.id = IdWorkerHelper.NewId();
             dto.create_time = DateTime.Now;
             dto.create_person = "admin";
-            //dto.menu_icon = dto.menu_font;
             if (!string.IsNullOrEmpty(dto.menu_url))
             {
                 dto.menu_type = 1;
@@ -56,7 +54,6 @@ namespace Nzh.Hero.Service
                 dto.menu_level = Sqldb.Queryable<sys_menu>().Where(s => s.id == dto.parent_id).Select(s => s.menu_level).First() + 1;
             }
             Sqldb.Insertable(dto).ExecuteCommand();
-            //设置菜单下按钮
             if (!string.IsNullOrEmpty(funcs))
             {
                 var funcArray = funcs.Split(',');
@@ -90,7 +87,6 @@ namespace Nzh.Hero.Service
                 dto.menu_level = Sqldb.Queryable<sys_menu>().Where(s => s.id == dto.parent_id).Select(s => s.menu_level).First() + 1;
             }
             Sqldb.Updateable(dto).IgnoreColumns(s => new { s.create_time, s.create_person }).ExecuteCommand();
-            //设置菜单下按钮
             Sqldb.Deleteable<sys_menu_ref_operate>().Where(s => s.menu_id == dto.id).ExecuteCommand();
             if (!string.IsNullOrEmpty(funcs))
             {
@@ -107,7 +103,6 @@ namespace Nzh.Hero.Service
                     }
                     Sqldb.Insertable(list).ExecuteCommand();
                 }
-
             }
         }
 

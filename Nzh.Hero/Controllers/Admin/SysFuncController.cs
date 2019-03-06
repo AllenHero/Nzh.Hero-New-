@@ -54,8 +54,6 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult GetDataById(string id)
         {
             var result = new ResultAdaptDto();
-            //result.Data = _funcApp.GetDataById(id);
-            ////result.statusCodeCode=JuiJsonEnum.Ok;
             return Content(result.ToJson());
         }
 

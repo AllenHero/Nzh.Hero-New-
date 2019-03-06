@@ -15,15 +15,6 @@ namespace Nzh.Hero.Core.Web
     {
         public static void WriteLoginCookie(string cliamsStr)
         {
-            //var claimsIdentity = new ClaimsIdentity(new Claim[] { new Claim(LoginCookieDto.CookieClaim, cliamsStr) }, "Forms");
-            //var userPrincipal = new ClaimsPrincipal(claimsIdentity);
-            //HttpContextExt.Current.SignInAsync(LoginCookieDto.CookieScheme, userPrincipal, new AuthenticationProperties
-            //{
-            //    ExpiresUtc = DateTime.UtcNow.AddHours(10),
-            //    IsPersistent = true,
-            //    AllowRefresh = false
-            //});
-
             cliamsStr = Encrypt.AesEncrypt(cliamsStr);
             HttpContextExt.Current.Response.Cookies.Append(LoginCookieDto.CookieClaim, cliamsStr, new CookieOptions()
             {
@@ -44,24 +35,16 @@ namespace Nzh.Hero.Core.Web
         }
         public static string GetUserLoginCookie()
         {
-            //string cookieClaims = LoginCookieDto.CookieClaim;
-            //var userPrincipal = HttpContextExt.Current.User;
-            //var userCookie = (from c in userPrincipal.Claims
-            //                  where c.Type == cookieClaims
-            //                  select c.Value).FirstOrDefault();
-
             var userCookie = HttpContextExt.Current.Request.Cookies[LoginCookieDto.CookieClaim];
             if (userCookie != null)
             {
                 return Encrypt.AesDecrypt(userCookie);
             }
             return null;
-            // return userCookie;
         }
 
         public static void RemoveCooke()
         {
-            //var userCookie = HttpContextExt.Current.Request.Cookies[LoginCookieDto.CookieClaim];
             HttpContextExt.Current.Response.Cookies.Delete(LoginCookieDto.CookieClaim);
         }
     }

@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Nzh.Hero.Service
 {
-    public class SysRoleService: BaseService
+    public class SysRoleService : BaseService
     {
         public SysRoleService(ISqlDbContext sqldb)
        : base(sqldb)
@@ -74,7 +74,6 @@ namespace Nzh.Hero.Service
 
         public List<ZtreeDto> GetRoleMenuTree(string roleid)
         {
-            //所有菜单
             var menu = Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).Select(s => new ZtreeDto()
             {
                 id = s.id.ToString(),
@@ -90,13 +89,11 @@ namespace Nzh.Hero.Service
                         name = o.func_cname
                     }).ToList();
             menu.AddRange(func);
-            //所有权限
             var role =
                 Sqldb.Queryable<sys_role_authorize>()
                     .Where(s => s.role_id == SqlFunc.ToInt64(roleid))
                     .Select(s => new { s.menu_id, s.menu_pid })
                     .ToList();
-            //判断是否有权限
             if (role.Any())
             {
                 foreach (var item in menu)
@@ -117,7 +114,6 @@ namespace Nzh.Hero.Service
             if (!string.IsNullOrEmpty(ids))
             {
                 var list = new List<sys_role_authorize>();
-                //var menuIds = ids.Split(',');
                 var menuIds = ids.ToObject<List<ZtreeDto>>();
                 foreach (var mid in menuIds)
                 {
@@ -138,25 +134,25 @@ namespace Nzh.Hero.Service
             }
         }
 
-            public List<sys_operate> GetOperateByRole(string menuId)
+        public List<sys_operate> GetOperateByRole(string menuId)
+        {
+            var list = new List<sys_operate>();
+            if (UserCookie.IsSuper)
             {
-                var list = new List<sys_operate>();
-                if (UserCookie.IsSuper)
-                {
-                    list =
-                        Sqldb.Queryable<sys_operate, sys_menu_ref_operate>((f, m) => f.id == m.operate_id && m.menu_id == SqlFunc.ToInt64(menuId))
-                            .Select((f, m) => f)
-                            .ToList();
-                }
-                else
-                {
-                    list =
-                       Sqldb.Queryable<sys_operate, sys_role_authorize>((f, r) => f.id == r.menu_id)
-                       .Where((f, r) => r.role_id == UserCookie.SysRoleId && r.menu_pid == SqlFunc.ToInt64(menuId))
-                           .Select((f, m) => f)
-                           .ToList();
-                }
-                return list;
+                list =
+                    Sqldb.Queryable<sys_operate, sys_menu_ref_operate>((f, m) => f.id == m.operate_id && m.menu_id == SqlFunc.ToInt64(menuId))
+                        .Select((f, m) => f)
+                        .ToList();
             }
+            else
+            {
+                list =
+                   Sqldb.Queryable<sys_operate, sys_role_authorize>((f, r) => f.id == r.menu_id)
+                   .Where((f, r) => r.role_id == UserCookie.SysRoleId && r.menu_pid == SqlFunc.ToInt64(menuId))
+                       .Select((f, m) => f)
+                       .ToList();
+            }
+            return list;
+        }
     }
 }

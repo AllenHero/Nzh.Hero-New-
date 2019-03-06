@@ -83,8 +83,6 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult GetRoleAuthById(string roleId)
         {
             var result = new ResultAdaptDto();
-            ////result.statusCodeCode=JuiJsonEnum.Ok;
-            //result.Data = _roleApp.GetRoleAuthMenu(roleId);
             return Content(result.ToJson());
         }
 
@@ -100,7 +98,6 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult SaveRoleAuth(string roleId, string ids)
         {
             var result = new ResultAdaptDto();
-            ////result.statusCodeCode = JuiJsonEnum.Ok;
             _roleService.SaveRoleAuth(roleId, ids);
             return Content(result.ToJson());
         }
@@ -108,8 +105,6 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult GetRoleMenuButton(string menuId)
         {
             var result = new ResultAdaptDto();
-            //result.statusCode = true;
-            //result.Data=_roleApp.GetOperateByRole(menuId);
             return Content(result.ToJson());
         }
     }

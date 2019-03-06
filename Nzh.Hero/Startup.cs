@@ -69,7 +69,6 @@ namespace Nzh.Hero
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseBrowserLink();
             }
             else
             {
@@ -83,15 +82,7 @@ namespace Nzh.Hero
 
             app.UseCookiePolicy();
 
-            //nlog日志配置文件
             env.ConfigureNLog("Config/nlog.config");
-
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
 
             app.UseMvc(routes =>
             {
@@ -101,7 +92,7 @@ namespace Nzh.Hero
                 routes.MapRoute(name: "areaRoute",
                     template: "{area:exists}/{controller=DeviceData}/{action=Index}/{id?}");
             });
-            //扩展HttpContext
+
             app.UseStaticHttpContext();
         }
 

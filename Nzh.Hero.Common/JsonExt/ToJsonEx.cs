@@ -16,13 +16,9 @@ namespace Nzh.Hero.Common.JsonExt
         }
         public static string ToJson(this object obj)
         {
-            // var timeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" };
             JsonSerializerSettings jsetting = new JsonSerializerSettings();
             jsetting.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            //jsetting.Converters.Add(new DataLongTypeConverter());
             jsetting.Converters.Add(new FormatLongAsTextConverter());
-
-            //jsetting.DefaultValueHandling = DefaultValueHandling.Include;
             return JsonConvert.SerializeObject(obj, jsetting);
         }
         public static string ToJson(this object obj, string datetimeformats)

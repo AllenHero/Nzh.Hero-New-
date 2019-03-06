@@ -38,52 +38,6 @@ namespace Nzh.Hero.Service
             return query;
         }
 
-        public List<SysAreaTreeDto> GetAreaTree()
-        {
-            // var list=new List<SysAreaTreeDto>();
-            //var data = Sqldb.Queryable<sys_citys>().OrderBy(s => s.sort).ToList();
-            //var top = data.Where(s => s.parent_id == 0).Select(s => new SysAreaTreeDto()
-            //{
-            //    id = s.id,
-            //    name = s.name,
-            //    parent_id = s.parent_id,
-            //    area_code = s.area_code,
-            //    lat_lng = s.lat_lng,
-            //    sort = s.sort,
-            //    remark = s.remark
-            //}).ToList();
-            //foreach (var item in top)
-            //{
-            //    var level2tree = data.Where(s => s.parent_id == item.id).Select(s => new SysAreaTreeDto()
-            //    {
-            //        id = s.id,
-            //        name = s.name,
-            //        parent_id = s.parent_id,
-            //        area_code = s.area_code,
-            //        lat_lng = s.lat_lng,
-            //        sort = s.sort,
-            //        remark = s.remark
-            //    }).ToList();
-            //    foreach (var tree in level2tree)
-            //    {
-            //        var level3tree = data.Where(s => s.parent_id == tree.id).Select(s => new SysAreaTreeDto()
-            //        {
-            //            id = s.id,
-            //            name = s.name,
-            //            parent_id = s.parent_id,
-            //            area_code = s.area_code,
-            //            lat_lng = s.lat_lng,
-            //            sort = s.sort,
-            //            remark = s.remark
-            //        }).ToList();
-
-            //        tree.children = level3tree;
-            //    }
-            //    item.children = level2tree;
-            //}
-            return new List<SysAreaTreeDto>();
-        }
-
         public bool IsExist(int areaCode, long id)
         {
             bool codeCount = false;
@@ -106,41 +60,6 @@ namespace Nzh.Hero.Service
             return codeCount;
         }
 
-        public void InsertData(sys_citys dto)
-        {
-            //if (dto.parent_id == 0)
-            //{
-            //    dto.parent_name = string.Empty;
-            //}
-            //else
-            //{
-            //    var parea = Sqldb.Queryable<sys_citys>().Where(s => s.id == dto.parent_id).First();
-
-            //    dto.area_Level = parea.area_Level + 1;
-            //}
-            //dto.lat_lng = dto.lat_lng ?? string.Empty;
-            //dto.id = IdWorkerHelper.NewId();
-            //dto.create_person = UserCookie.AccountName;
-            //dto.create_time = DateTime.Now;
-            Sqldb.Insertable(dto).ExecuteCommand();
-        }
-
-        public void UpdateData(sys_citys dto)
-        {
-            //if (dto.parent_id == 0)
-            //{
-            //    dto.parent_name = string.Empty;
-            //}
-            //else
-            //{
-            //    var parea = Sqldb.Queryable<sys_citys>().Where(s => s.id == dto.parent_id).First();
-
-            //    dto.area_Level = parea.area_Level + 1;
-            //}
-            //dto.lat_lng = dto.lat_lng ?? string.Empty;
-            Sqldb.Updateable(dto).ExecuteCommand();
-        }
-
         public sys_citys GetAreaById(string id)
         {
             return Sqldb.Queryable<sys_citys>().Where(s => s.id == SqlFunc.ToInt64(id)).First();
@@ -153,38 +72,6 @@ namespace Nzh.Hero.Service
                 var idsArray = ids.Split(',');
                 Sqldb.Deleteable<sys_citys>().In(idsArray).ExecuteCommand();
             }
-        }
-
-        public List<ZtreeDto> GetAreaZtree(int level)
-        {
-            return new List<ZtreeDto>();
-            //var data =
-            //        Sqldb.Queryable<sys_citys>()
-            //            .Where(s => s.area_Level <= level)
-            //            .OrderBy(s => s.sort)
-            //            .Select(s => new ZtreeDto()
-            //            {
-            //                id = s.id.ToString(),
-            //                name = s.name,
-            //                pId = s.parent_id.ToString(),
-            //                treeLevel = s.area_Level
-            //            }).ToList();;
-
-            //if (UserCookie.UserLevel == (int)UserLevelEnum.City)
-            //{
-            //    data =
-            //        data.Where(
-            //            s => s.pId == SqlFunc.ToString(UserCookie.City) || s.id == SqlFunc.ToString(UserCookie.City))
-            //            .ToList();
-            //}
-            //else if (UserCookie.UserLevel == (int) UserLevelEnum.County)
-            //{
-            //    data =
-            //        data.Where(
-            //            s => s.pId == SqlFunc.ToString(UserCookie.County) || s.id == SqlFunc.ToString(UserCookie.County))
-            //            .ToList();
-            //}
-            //return data;
         }
 
         public List<CitySelDto> GetCitySel()

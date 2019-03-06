@@ -8,7 +8,6 @@ namespace Nzh.Hero.Core.DbContext
     public class SqlDbContext :ISqlDbContext, IDisposable
     {
         public SqlSugarClient _db;
-        ///private static string ConnectionString = String.Empty;
         public SqlSugarClient DbInstance()
         {
             if (_db == null && SugarDbConn.DbConnectStr != null)
@@ -19,7 +18,7 @@ namespace Nzh.Hero.Core.DbContext
                     DbType = DbType.MySql,
                     IsAutoCloseConnection = false,
                     InitKeyType = InitKeyType.Attribute,
-                });//获SqlSugarClient对象
+                });
 
             }
             return _db;
@@ -30,7 +29,6 @@ namespace Nzh.Hero.Core.DbContext
             if (_db != null)
             {
                 _db.Dispose();
-                // LogNHelper.Exception("释放了资源");
             }
         }
     }

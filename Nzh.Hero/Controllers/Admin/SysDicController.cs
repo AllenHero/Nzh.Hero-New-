@@ -42,22 +42,13 @@ namespace Nzh.Hero.Controllers.Admin
         {
             var data = new BootstrapGridDto();
             var list = _dicService.GetData();
-            //data.list = list;
-            //data.pageSize = list.Count;
             return Content(data.ToJson());
         }
 
         public ActionResult GetGridDataBypId()
         {
-            //var data = new BootstrapGridDto();
             string pid = RequestHelper.RequestGet("pid", "0");
-            //if (HttpContextExt.Current.Request.Form.Count > 0 && HttpContextExt.Current.Request.Form.ContainsKey("pid"))
-            //{
-            //    var pid = HttpContext.Request.Form["pid"];
-            //}
             var list = _dicService.GetGridDataBypId(pid.ToInt64());
-            // data.rows = list;
-            //data.total = list.Count;
             return Content(list.ToJson());
         }
 
@@ -83,8 +74,6 @@ namespace Nzh.Hero.Controllers.Admin
             var result = new ResultAdaptDto();
             var data = _dicService.GetDicById(id);
             result.data.Add("model", data);
-            //result.Data = _dicApp.GetDicById(id);
-            ////result.statusCodeCode=JuiJsonEnum.Ok;
             return Content(result.ToJson());
         }
 
@@ -100,8 +89,6 @@ namespace Nzh.Hero.Controllers.Admin
             var data = _dicService.GetDicZtree();
             data.Insert(0, new ZtreeDto() { id = "0", name = "通用字典" });
             result.data.Add("dicTree", data);
-            //result.Data = data;
-            //result.statusCode = true;
             return Content(result.ToJson());
         }
 

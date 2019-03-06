@@ -43,34 +43,9 @@ namespace Nzh.Hero.Controllers.Admin
             return Content(list.ToJson());
         }
 
-        [HttpPost]
-        public ActionResult SaveData(sys_citys dto)
-        {
-            //bool existCount =false;
-            //if (!string.IsNullOrEmpty(dto.zipcode))
-            //{
-            //    existCount = _areaApp.IsExist(dto.area_code, dto.id);
-            //}
-            //if (existCount)
-            //{
-            //    return Error("当前行政编码已经存在");
-            //}
-            //if (dto.id == 0)
-            //{
-            //    _areaApp.InsertData(dto);
-            //}
-            //else
-            //{
-            //    _areaApp.UpdateData(dto);
-            //}
-            return Success();
-        }
-
         public ActionResult GetDataById(string id)
         {
             var result = new ResultAdaptDto();
-            //result.Data = _areaApp.GetAreaById(id);
-            ////result.statusCodeCode = JuiJsonEnum.Ok;
             return Content(result.ToJson());
         }
 
@@ -100,9 +75,6 @@ namespace Nzh.Hero.Controllers.Admin
         {
             string level = RequestHelper.RequestGet("level", "3");
             var result = new ResultAdaptDto();
-            //result.statusCode = true;
-            //result.Data = _areaApp.GetAreaZtree(level.ToInt());
-            //var data = _areaApp.GetAreaZtree();
             return Content(result.ToJson());
         }
 
@@ -113,52 +85,6 @@ namespace Nzh.Hero.Controllers.Admin
             data.Insert(0, new ZtreeDto() { id = "0", name = "全国" });
             result.data.Add("list", data);
             return Content(result.ToJson());
-        }
-
-        public ActionResult GetArea(string pid)
-        {
-            // var jresult = new JuiJsonResult();
-            //var result = TencentMapHelper.ReqMapAreaData(pid.Trim());
-            //if (string.IsNullOrEmpty(result))
-            //{
-            //    j////result.statusCodeCode = JuiJsonEnum.Error;
-            //    jresult.message = "接口错误";
-            //    return Content(jresult.ToJson());
-            //}
-            //var mobj = JObject.Parse(result);
-            //List<MapAreaDto> list=new List<MapAreaDto>();
-            //if (mobj["status"].ToString() == "0")
-            //{
-            //    if (mobj["result"] != null)
-            //    {
-            //        JArray resultobj = JArray.Parse(mobj["result"].ToString());
-            //        JToken[] templist = resultobj[0].ToArray();
-            //        int arrayCount = templist.Length;
-            //        if (arrayCount > 0)
-            //        {
-            //            for (int i = 0; i < arrayCount; i++)
-            //            {
-            //                var model=new MapAreaDto();
-            //                model.id = templist[i]["id"].ToString();
-            //                model.fullname= templist[i]["fullname"].ToString();
-            //                if (templist[i]["name"] != null)
-            //                {
-            //                    model.name = templist[i]["name"].ToString();
-            //                }
-            //                model.lat = templist[i]["location"]["lat"].ToString();
-            //                model.lng = templist[i]["location"]["lng"].ToString();
-            //                list.Add(model);
-            //            }
-            //        }
-            //       // List<MapAreaDto> list = JsonConvert.DeserializeObject<List<MapAreaDto>>();
-            //    }
-            //}
-
-            //if (list.Any())
-            //{
-            //    _areaApp.SaveTecentAreaData(list,pid);
-            //}
-            return Content("");
         }
     }
 }

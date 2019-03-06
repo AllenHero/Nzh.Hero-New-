@@ -31,10 +31,6 @@ namespace Nzh.Hero.Controllers.Admin
             var menuList = _menuService.GetMenuList().Where(s => s.menu_type == 0).OrderBy(s => s.menu_level).ToList();
             menuList.Insert(0, new sys_menu() { id = 0, menu_name = "请选择" });
             ViewBag.MenuSel = new SelectList(menuList, "id", "menu_name");
-            //按钮
-            //var funcSelList = _menuApp.GetFuncSelList();
-            //funcSelList.Insert(0, new sys_operate(){ id = 0, func_cname = "请选择" });
-            //ViewBag.FuncSel = new SelectList(funcSelList, "id", "func_cname");
             return View();
         }
 

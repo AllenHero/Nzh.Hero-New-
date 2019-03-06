@@ -40,24 +40,20 @@ namespace Nzh.Hero.Controllers
             var userDto = user.ToObject<LoginUserDto>();
             var result = new ResultAdaptDto();
             var menu = await _menuService.GetRoleMenu();
-            //var status = GetStatusDic();
             result.data.Add("menu", menu);
             result.data.Add("user", userDto);
-            // result.data.Add("status", status);
             return Content(result.ToJson());
         }
 
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

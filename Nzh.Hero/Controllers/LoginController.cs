@@ -55,17 +55,7 @@ namespace Nzh.Hero.Controllers
                     loginUserDto.City = user.city;
                     loginUserDto.County = user.county;
                     loginUserDto.UserLevel = user.user_level;
-                    //if (user.account_name.ToLower() == "admin")
-                    //{
-                    //    loginUserDto.IsSuper = true; //user.IsSuper;
-                    //}
-                    //else
-                    //{
-                    //    loginUserDto.IsSuper = user.is_super; //user.IsSuper;
-                    //}
                     loginUserDto.SysRoleId = user.sys_role_id;
-                    //设置cookie
-                    // FormsAuthentication.SetAuthCookie(loginUserDto.AccountName, false);
                     string claimstr = loginUserDto.ToJson();
                     CookieHelper.WriteLoginCookie(claimstr);
 

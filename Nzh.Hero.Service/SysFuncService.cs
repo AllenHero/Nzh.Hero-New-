@@ -60,7 +60,6 @@ namespace Nzh.Hero.Service
                 {
                     var idsArray = ids.Split(',');
                     long[] arri = idsArray.StrToLongArray();
-
                     Sqldb.Ado.BeginTran();
                     Sqldb.Deleteable<sys_operate>().In(idsArray).ExecuteCommand();
                     Sqldb.Deleteable<sys_menu_ref_operate>().Where(s => arri.Contains(s.operate_id)).ExecuteCommand();

@@ -45,7 +45,6 @@ namespace Nzh.Hero.Controllers.Admin
 
         public ActionResult GetData(BootstrapGridDto param)
         {
-            //var data = new DataGridEx();
             string accountName = RequestHelper.RequestGet("accountName", "");
             var data = _userService.GetData(param, accountName);
             return Content(data.ToJson());
@@ -74,8 +73,6 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult GetUserById(string id)
         {
             var result = new ResultAdaptDto();
-            //result.Data = _userApp.GetUserById(id);
-            ////result.statusCodeCode=JuiJsonEnum.Ok;
             var data = _userService.GetUserById(id);
             result.data.Add("model", data);
             return Content(result.ToJson());

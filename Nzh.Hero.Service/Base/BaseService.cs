@@ -15,6 +15,7 @@ namespace Nzh.Hero.Service.Base
         private readonly ISqlDbContext iSqlContext;
 
         protected LoginUserDto UserCookie;
+
         public BaseService(ISqlDbContext sqlContext)
         {
             UserCookie = GetUserCookie();
