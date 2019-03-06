@@ -4,4 +4,20 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+    <PackageReference Include="sqlSugarCore" Version="4.9.9.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AutofacInjectModule\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nzh.Hero.Common\Nzh.Hero.Common.csproj" />
+  </ItemGroup>
+
 </Project>
