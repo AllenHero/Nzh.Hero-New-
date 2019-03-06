@@ -8,8 +8,8 @@ namespace Nzh.Hero.Core.Web
 {
     public class LoginCookieDto
     {
-        public static string CookieScheme = "nzh_au_auth";
-        public static string CookieClaim = "nzh_au_user";
+        public static string CookieScheme = "hero_au_auth";
+        public static string CookieClaim = "hero_au_user";
     }
     public class CookieHelper
     {

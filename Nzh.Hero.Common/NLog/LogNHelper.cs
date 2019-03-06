@@ -11,7 +11,7 @@ namespace Nzh.Hero.Common.NLog
 
         static LogNHelper()
         {
-            logger = LogManager.GetLogger("NzhLog:");
+            logger = LogManager.GetLogger("HeroLog:");
         }
 
         public static void Info(string message)
