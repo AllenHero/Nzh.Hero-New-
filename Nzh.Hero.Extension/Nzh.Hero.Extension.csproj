@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nzh.Hero.Core\Nzh.Hero.Core.csproj" />
+    <ProjectReference Include="..\Nzh.Hero.IService\Nzh.Hero.IService.csproj" />
+    <ProjectReference Include="..\Nzh.Hero.Service\Nzh.Hero.Service.csproj" />
+  </ItemGroup>
+
+</Project>

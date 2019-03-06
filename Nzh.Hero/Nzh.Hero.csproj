@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Nzh.Hero.Extension\Nzh.Hero.Extension.csproj" />
     <ProjectReference Include="..\Nzh.Hero.Service\Nzh.Hero.Service.csproj" />
   </ItemGroup>
 

@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero", "Nzh.Hero\Nzh.Hero.csproj", "{4DAFB865-4E87-480F-A1F1-3D501BDAC614}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzh.Hero", "Nzh.Hero\Nzh.Hero.csproj", "{4DAFB865-4E87-480F-A1F1-3D501BDAC614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero.Service", "Nzh.Hero.Service\Nzh.Hero.Service.csproj", "{2DA1FC6E-A448-434D-B33B-5D5EF896F197}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzh.Hero.Service", "Nzh.Hero.Service\Nzh.Hero.Service.csproj", "{2DA1FC6E-A448-434D-B33B-5D5EF896F197}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero.IService", "Nzh.Hero.IService\Nzh.Hero.IService.csproj", "{9069626D-C791-41F3-B113-5A4E54777DD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzh.Hero.IService", "Nzh.Hero.IService\Nzh.Hero.IService.csproj", "{9069626D-C791-41F3-B113-5A4E54777DD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero.Model", "Nzh.Hero.Model\Nzh.Hero.Model.csproj", "{783F3B32-4BA4-4A06-8292-5E515F73F2A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzh.Hero.Model", "Nzh.Hero.Model\Nzh.Hero.Model.csproj", "{783F3B32-4BA4-4A06-8292-5E515F73F2A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero.ViewModel", "Nzh.Hero.ViewModel\Nzh.Hero.ViewModel.csproj", "{D0A6EB41-5AD6-4211-9B8E-BBF197A74670}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzh.Hero.ViewModel", "Nzh.Hero.ViewModel\Nzh.Hero.ViewModel.csproj", "{D0A6EB41-5AD6-4211-9B8E-BBF197A74670}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero.Core", "Nzh.Hero.Core\Nzh.Hero.Core.csproj", "{86804F21-8A28-499B-B097-ECBA35A82F2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzh.Hero.Core", "Nzh.Hero.Core\Nzh.Hero.Core.csproj", "{86804F21-8A28-499B-B097-ECBA35A82F2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero.Common", "Nzh.Hero.Common\Nzh.Hero.Common.csproj", "{C1A1C7E9-00A9-4664-9150-E957E3D9C4B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzh.Hero.Common", "Nzh.Hero.Common\Nzh.Hero.Common.csproj", "{C1A1C7E9-00A9-4664-9150-E957E3D9C4B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzh.Hero.Extension", "Nzh.Hero.Extension\Nzh.Hero.Extension.csproj", "{9522845E-40E2-48A1-8C62-9E2983BF67CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{C1A1C7E9-00A9-4664-9150-E957E3D9C4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1A1C7E9-00A9-4664-9150-E957E3D9C4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A1C7E9-00A9-4664-9150-E957E3D9C4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9522845E-40E2-48A1-8C62-9E2983BF67CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9522845E-40E2-48A1-8C62-9E2983BF67CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9522845E-40E2-48A1-8C62-9E2983BF67CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9522845E-40E2-48A1-8C62-9E2983BF67CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

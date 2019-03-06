@@ -13,9 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NLog.Web;
 using Nzh.Hero.Common.NLog;
-using Nzh.Hero.Core.AutofacInjectModule;
 using Nzh.Hero.Core.DbContext;
 using Nzh.Hero.Core.Web;
+using Nzh.Hero.Extension;
 using Nzh.Hero.IService;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
@@ -65,13 +65,12 @@ namespace Nzh.Hero
 
             #endregion
 
-            services.AddTransient<ISysUserService, SysUserService>();
-            services.AddTransient<ISysAreaService, SysAreaService>();
-            services.AddTransient<ISysDicService, SysDicService>();
-            services.AddTransient<ISysFuncService, SysFuncService>();
-            services.AddTransient<ISysMenuService, SysMenuService>();
-            services.AddTransient<ISysRoleService, SysRoleService>();
-            services.AddTransient<ISysUserService, SysUserService>();
+            //services.AddTransient<ISysAreaService, SysAreaService>();
+            //services.AddTransient<ISysDicService, SysDicService>();
+            //services.AddTransient<ISysFuncService, SysFuncService>();
+            //services.AddTransient<ISysMenuService, SysMenuService>();
+            //services.AddTransient<ISysRoleService, SysRoleService>();
+            //services.AddTransient<ISysUserService, SysUserService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -110,7 +109,8 @@ namespace Nzh.Hero
         {
             try
             {
-                builder.RegisterModule(new AutofacModule());
+                //builder.RegisterModule(new AutofacModule());  
+                builder.RegisterModule(new AutofacExt());
             }
             catch (Exception e)
             {
