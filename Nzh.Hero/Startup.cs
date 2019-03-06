@@ -47,7 +47,7 @@ namespace Nzh.Hero
 
             #region 获取配置项
 
-            SugarDbConn.DbConnectStr = this.Configuration.GetSection("DbConn:mysqlConn").Value;   //为数据库连接字符串赋值
+            SugarDbConn.DbConnectStr = this.Configuration.GetSection("DbConn:mysqlConn").Value;   
             GlobalParamsDto.RpcUname = this.Configuration.GetSection("RpcUser:Username").Value;
             GlobalParamsDto.RpcPwd = this.Configuration.GetSection("RpcUser:Password").Value;
 
@@ -88,7 +88,7 @@ namespace Nzh.Hero
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Login}/{action=Index}/{id?}");
                 routes.MapRoute(name: "areaRoute",
                     template: "{area:exists}/{controller=DeviceData}/{action=Index}/{id?}");
             });
