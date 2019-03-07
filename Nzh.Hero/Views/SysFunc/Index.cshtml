@@ -2,28 +2,43 @@
     ViewBag.Title = "操作管理";
     Layout = null;
 }
-<div class="bjui-pageContent" style="top: 0px; bottom: 35px;">
-    <div id="gridList" style="bottom: 30px;">
-        <table id="j_datagrid" class="table table-bordered"></table>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+                <div id="toolbar" class="btn-group">
+
+                </div>
+                <div class="jqGrid_wrapper">
+                    <table id="$operateTable"></table>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 <script>
+    {
+    var $operateTable;
     $(function () {
         loadGrid();
     });
 
     function loadGrid() {
-        $('#j_datagrid').datagrid({
-            height: 600,
-            tableWidth: '95%',
-            gridTitle: '操作按钮表格',
-            showToolbar: true,
-            dataUrl: '/sysfunc/GetData',
-            filterThead: false,
-            columnFilter: false,
-            inlineEditMult: false,
-            showCheckboxcol: true,
-            paging: { pageSize: 15 },
+        $operateTable = $('#operateTable').bootstrapTable({
+            url: '/sysfunc/getdata',
+            toolbar: '#toolbar',
+            pagination: true,
+            height: $(window).height() - 50,
+            pageSize: 15,
+            pageList: [5, 10, 15, 20],
+            showColumns: true,
+            showRefresh: true,
+            clickToSelect: true,
+            sidePagination: "server",
+            locale: "zh-CN",
+            striped: true,
             columns: [
                 { name: 'func_cname', label: '按钮名称', align: 'center' },
                 { name: 'func_name', label: '按钮事件', align: 'center' },
@@ -32,18 +47,19 @@
                     
                 //} },
                 {
-                    name: 'func_class', label: '按钮样式', align: 'center', render: function (v,d) {
+                    name: 'func_class', label: '按钮样式', align: 'center', render: function (v, d)
+                    {
                         return renderButtonTempl(d);
-                    }  },
-                { name: 'func_sort', label: '排序', align: 'center' },
+                    }
+                },
+                 { name: 'func_sort', label: '排序', align: 'center' },
                  { name: 'remark', label: '备注', align: 'center' }
             ],
             linenumberAll: true
         });
-
-
         //jutils.loadToolBarExt('#gridList',true);
-        jutils.loadRoleToolBar('#gridList',true);
+        //jutils.loadRoleToolBar('#gridList',true);
+        jutils.initToolBar('#toolbar', true);
     }
 
     function renderButtonTempl(rolebtn) {
