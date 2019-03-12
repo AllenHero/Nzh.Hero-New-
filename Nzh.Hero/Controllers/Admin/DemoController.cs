@@ -29,6 +29,14 @@ namespace Nzh.Hero.Controllers.Admin
             return View();
         }
 
+        public ActionResult GetTestByIds(string id)
+        {
+            var result = new ResultAdaptDto();
+            var data = _demoService.GetTestById(id);
+            result.data.Add("model", data);
+            return Content(result.ToJson());
+        }
+
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;

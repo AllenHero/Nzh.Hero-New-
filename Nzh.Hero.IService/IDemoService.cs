@@ -17,7 +17,7 @@ namespace Nzh.Hero.IService
 
         void DelUserByIds(string ids);
 
-        demo GetRoleById(string id);
+        demo GetTestById(string id);
 
     }
 }
