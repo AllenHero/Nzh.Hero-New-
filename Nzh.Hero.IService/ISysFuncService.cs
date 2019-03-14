@@ -1,4 +1,5 @@
-﻿using Nzh.Hero.Model;
+﻿using Nzh.Hero.IService.Base;
+using Nzh.Hero.Model;
 using Nzh.Hero.ViewModel.Common;
 using System;
 using System.Collections.Generic;

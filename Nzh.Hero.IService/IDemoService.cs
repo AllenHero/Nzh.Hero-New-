@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Nzh.Hero.IService
 {
-    public interface IDemoService
+    public interface IDemoService 
     {
         BootstrapGridDto GetData(BootstrapGridDto param);
 

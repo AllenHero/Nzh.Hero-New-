@@ -1,4 +1,5 @@
-﻿using Nzh.Hero.Model;
+﻿using Nzh.Hero.IService.Base;
+using Nzh.Hero.Model;
 using Nzh.Hero.ViewModel.Common;
 using Nzh.Hero.ViewModel.SystemDto;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Nzh.Hero.IService
 {
-    public interface ISysMenuService
+    public interface ISysMenuService 
     {
         List<sys_menu> GetMenuList(BootstrapGridDto param);
 

@@ -1,4 +1,5 @@
-﻿using Nzh.Hero.Model;
+﻿using Nzh.Hero.IService.Base;
+using Nzh.Hero.Model;
 using Nzh.Hero.ViewModel.Common;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Nzh.Hero.IService
 {
-    public interface ISysDicService
+    public interface ISysDicService 
     {
         List<sys_dictionary> GetData();
 

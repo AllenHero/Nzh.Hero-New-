@@ -1,4 +1,5 @@
-﻿using Nzh.Hero.Model;
+﻿using Nzh.Hero.IService.Base;
+using Nzh.Hero.Model;
 using Nzh.Hero.ViewModel.Common;
 using Nzh.Hero.ViewModel.SystemDto;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Nzh.Hero.IService
 {
-    public interface ISysAreaService
+    public interface ISysAreaService 
     {
         List<CityTreeDto> GetData(long pid);
 
