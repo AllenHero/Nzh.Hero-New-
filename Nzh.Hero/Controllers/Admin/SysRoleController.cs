@@ -51,7 +51,7 @@ namespace Nzh.Hero.Controllers.Admin
             {
                 _roleService.UpdateRoleData(dto);
             }
-            return Success();
+            return Success("保存成功");
         }
 
         public ActionResult GetRoleByIds(string id)

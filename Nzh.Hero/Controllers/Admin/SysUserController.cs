@@ -68,7 +68,7 @@ namespace Nzh.Hero.Controllers.Admin
             {
                 _userService.UpdateData(dto);
             }
-            return Success();
+            return Success("保存成功");
         }
 
         public ActionResult GetUserById(string id)

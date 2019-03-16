@@ -67,7 +67,7 @@ namespace Nzh.Hero.Controllers.Admin
             {
                 _dicService.UpdateDicData(dto);
             }
-            return Success();
+            return Success("保存成功");
         }
 
         public ActionResult GetDicById(string id)

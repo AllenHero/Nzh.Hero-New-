@@ -49,7 +49,7 @@ namespace Nzh.Hero.Controllers.Admin
             {
                 _funcService.UpdateFunc(dto);
             }
-            return Json("");
+            return Json("保存成功");
         }
 
         public ActionResult GetDataById(string id)

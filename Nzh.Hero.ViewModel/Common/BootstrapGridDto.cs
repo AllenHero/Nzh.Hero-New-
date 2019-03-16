@@ -12,12 +12,4 @@ namespace Nzh.Hero.ViewModel.Common
         public int page { get { return (this.offset / limit) + 1; } }
         public int limit { get; set; }
     }
-
-    public class LigerGridDto
-    {
-        public object Rows { get; set; }
-        public int Total { get; set; }
-        public int page { get; set; }
-        public int pagesize { get; set; }
-    }
 }

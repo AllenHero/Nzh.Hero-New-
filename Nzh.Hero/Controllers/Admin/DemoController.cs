@@ -60,7 +60,7 @@ namespace Nzh.Hero.Controllers.Admin
             {
                 _demoService.UpdateData(dto);
             }
-            return Success();
+            return Success("保存成功");
         }
 
         public ActionResult DelUserByIds(string ids)
