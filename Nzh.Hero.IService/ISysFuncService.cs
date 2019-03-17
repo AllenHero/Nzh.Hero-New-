@@ -15,7 +15,7 @@ namespace Nzh.Hero.IService
 
         void UpdateFunc(sys_operate dto);
 
-        sys_operate GetDataById(string id);
+        sys_operate GetFuncByIds(string id);
 
         void DelByIds(string ids);
 

@@ -1,69 +1,97 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Form.cshtml";
 }
-<div class="bjui-pageContent" style="top: 0px; bottom: 35px;">
-    <div class="bs-example">
-        <form id="funcform">
-            <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
-            <div class="bjui-row col-2">
-                <label class="row-label">按钮名称</label>
-                <div class="row-input required">
-                    <input type="text" name="func_cname" id="func_cname" value="" data-rule="required">
-                </div>
-                <label class="row-label">按钮事件</label>
-                <div class="row-input required">
-                    <input type="text" name="func_name" id="func_name" value="" data-rule="required">
-                </div>
-                <label class="row-label">按钮图标</label>
-                <div class="row-input">
-                    <input type="text" name="func_icon" id="func_icon" value="" data-rule="">
-                </div>
-                <label class="row-label">按钮样式</label>
-                <div class="row-input">
-                    <input type="text" name="func_class" id="func_class" value="" data-rule="">
-                </div>
-                <label class="row-label">排序</label>
-                <div class="row-input required">
-                    <input type="text" name="func_sort" id="func_sort" value="1" data-toggle="spinner" data-min="1" data-max="10000" data-step="1" data-rule="integer">
-                </div>
-                <br />
-                <label class="row-label">备注</label>
-                <div class="row-input">
-                    <textarea name="remark" id="remark" data-toggle="autoheight" cols="60" rows="4"></textarea>
-                </div>
+<div class="ibox-content">
+    <form class="form form-horizontal" id="form" autocomplete="off">
+        <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">中文名称：</label>
+            <div class="col-sm-4">
+                <input type="text" name="func_name" id="func_name" value="" class="form-control" data-rule="required">
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">英文名称：</label>
+            <div class="col-sm-4">
+                <input type="text" name="func_cname" id="func_cname" value="" class="form-control" data-rule="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">图标：</label>
+            <div class="col-sm-4">
+                <input type="text" name="func_icon" id="func_icon" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">排序：</label>
+            <div class="col-sm-4">
+                <input type="number" name="func_sort" id="func_sort" class="form-control" data-rule="required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">类别：</label>
+            <div class="col-sm-4">
+                <input type="text" name="func_class" id="func_class" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">备注：</label>
+            <div class="col-sm-9">
+                <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-3">
+                <button class="btn btn-primary" type="submit">保存内容</button>
+                <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+            </div>
+        </div>
+    </form>
 </div>
-<div class="bjui-pageFooter" style="bottom:5px;">
-    <ul>
-        <li><button type="button" class="btn-close btn" data-icon="close"><i class="fa fa-close"></i> 取消</button></li>
-        <li><button type="button" class="btn-default btn" data-icon="save" onclick="save();"><i class="fa fa-save"></i> 保存</button></li>
-    </ul>
-</div>
-<script type="text/javascript">
-    $(function () {
-        loadData();
-    });
 
-
-    function loadData() {
-        var id = $.CurrentDialog.find("#id").val();
-        if (id !== '') {
-
-            jutils.ajaxGet('/sysfunc/GetDataById', { id: id }, function (res) {
-                $('#funcform').initFormData(res.Data);
-
+@section scripts{
+    <script type="text/javascript">
+        var index = parent.layer.getFrameIndex(window.name);
+        $(function () {
+            $('#form').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                   
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/sysfunc/SaveData', $(form).serialize(),
+                        function (res) {
+                            parent.layer.close(index);
+                        });
+                }
             });
-        }
-    }
-    function save() {
-        BJUI.ajax('ajaxform', {
-            url: '/sysfunc/savedata',
-            form: $('#funcform'),
-            closeCurrent: true
+
+            loadData();
         });
-    }
-</script>
+
+        function loadData() {
+            var id = $("#id").val();
+
+            if (id !== '') {
+                jutils.ajaxGet('/sysfunc/GetFuncByIds', { id: id }, function (res) {
+                    $('#form').initFormData(res.data.model);
+
+                });
+            }
+        }
+
+        function cancel() {
+            parent.layer.close(index);
+        }
+    </script>
+
+
+}
+
 
 

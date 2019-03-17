@@ -52,9 +52,11 @@ namespace Nzh.Hero.Controllers.Admin
             return Json("保存成功");
         }
 
-        public ActionResult GetDataById(string id)
+        public ActionResult GetFuncByIds(string id)
         {
             var result = new ResultAdaptDto();
+            var data = _funcService.GetFuncByIds(id);
+            result.data.Add("model", data);
             return Content(result.ToJson());
         }
 

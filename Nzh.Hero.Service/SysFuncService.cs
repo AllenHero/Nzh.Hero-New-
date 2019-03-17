@@ -5,6 +5,7 @@ using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service.Base;
 using Nzh.Hero.ViewModel.Common;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace Nzh.Hero.Service
         {
             int total = 0;
             var data = Sqldb.Queryable<sys_operate>()
-                .OrderBy(s => s.func_sort)
+                .OrderBy(s => s.create_time, OrderByType.Desc)
+                 .Select(u => new { Id = u.id, FuncName = u.func_name, FuncCName = u.func_cname, FuncIcon = u.func_icon, FuncSort = u.func_sort, FuncClass=u.func_class, CreateTime = u.create_time, CreatePerson = u.create_person })
                 .ToPageList(param.page, param.limit, ref total);
             param.rows = data;
             param.total = total;
@@ -48,7 +50,7 @@ namespace Nzh.Hero.Service
             Sqldb.Updateable(dto).IgnoreColumns(s => new { s.create_time, s.create_person }).ExecuteCommand();
         }
 
-        public sys_operate GetDataById(string id)
+        public sys_operate GetFuncByIds(string id)
         {
             return Sqldb.Queryable<sys_operate>().InSingle(id);
         }
