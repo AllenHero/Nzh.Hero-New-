@@ -16,7 +16,7 @@
                     </div>*@
                 </div>
                 <div class="">
-                    <table id="table"></table>
+                    <table id="menutable"></table>
                 </div>
             </div>
           
@@ -28,14 +28,14 @@
     <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
     <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
     <script>
-        var $table;
+        var $menutable;
 
         $(function() {
             loadGrid();
         });
 
         function loadGrid() {
-            $table = $("#table").bootstrapTable({
+            $menutable = $("#menutable").bootstrapTable({
                 url: '/SysMenu/GetData',
                 height: $(window).height(),
                 striped: true,
@@ -52,13 +52,13 @@
                 treeShowField: 'menu_name',
                 parentIdField: 'parent_id',
                 onLoadSuccess: function (data) {
-                    $table.treegrid({
+                    $menutable.treegrid({
                         // initialState: 'collapsed',
                         treeColumn: 1,
                         // expanderExpandedClass: 'glyphicon glyphicon-minus',
                         // expanderCollapsedClass: 'glyphicon glyphicon-plus',
                         onChange: function() {
-                            $table.bootstrapTable('resetWidth');
+                            $menutable.bootstrapTable('resetWidth');
                         }
                     });
                 }
@@ -75,7 +75,7 @@
         function add() {
             jutils.dialogForm('菜单信息', '/sysmenu/form',null,
                 function() {
-                    $table.bootstrapTable('refresh');
+                    $menutable.bootstrapTable('refresh');
                 });
             //$.dialog({
             //    id:'hha',
@@ -87,13 +87,13 @@
             //});
         }
         function edit() {
-            var rows = $table.bootstrapTable('getSelections');
+            var rows = $menutable.bootstrapTable('getSelections');
             if (rows.length === 1) {
                // console.log(rows);
                 jutils.dialogForm('菜单信息', '/sysmenu/form', {id:rows[0].id},
                     function() {
                        // console.log('关闭回调');
-                        $table.bootstrapTable('refresh');
+                        $menutable.bootstrapTable('refresh');
                     });
             } else {
                 jutils.warn('请选择一条需要编辑的数据行');
@@ -101,7 +101,7 @@
         }
 
         function del() {
-            var rows = $table.bootstrapTable('getSelections');
+            var rows = $menutable.bootstrapTable('getSelections');
             if (rows.length === 0) {
                 jutils.warn('请选中需要删除的数据行');
                 return;
@@ -117,13 +117,13 @@
                
                 jutils.ajaxGet('/sysmenu/del', { ids: ids.join() }, function () {
                     jutils.success('删除成功');
-                    $table.bootstrapTable('refresh');
+                    $menutable.bootstrapTable('refresh');
                 });
             });
         }
 
         function refresh() {
-            $table.bootstrapTable('refresh');
+            $menutable.bootstrapTable('refresh');
         }
     </script>
 

@@ -10,7 +10,7 @@
                   
                 </div>
                 <div class="jqGrid_wrapper">
-                    <table id="sysfuncTable"></table>
+                    <table id="funcTable"></table>
                     
                 </div>
             </div>
@@ -20,13 +20,13 @@
 @section scripts
 {
     <script>
-        var $sysfuncTable;
+        var $funcTable;
         $(function() {
             loadGrid();
         });
 
         function loadGrid() {
-            $sysfuncTable=$("#sysfuncTable").bootstrapTable({
+            $funcTable=$("#funcTable").bootstrapTable({
                 url: '/sysfunc/getdata',
                 toolbar: '#toolbar',       
                 pagination: true,
@@ -56,18 +56,18 @@
 
         function add() {
             jutils.dialogForm('操作管理', '/sysfunc/form', {id:''},function () {
-                $sysfuncTable.bootstrapTable('refresh');
+                $funcTable.bootstrapTable('refresh');
             });
         }
 
         function edit() {
-            var rows = $sysfuncTable.bootstrapTable('getSelections');
+            var rows = $funcTable.bootstrapTable('getSelections');
             //console.log(rows);
             if (rows.length === 1) {
                 // console.log(rows);
                 jutils.dialogForm('管理管理', '/sysfunc/form', {id:rows[0].Id},
                     function() {
-                        $sysfuncTable.bootstrapTable('refresh');
+                        $funcTable.bootstrapTable('refresh');
                     });
             } else {
                 jutils.warn('请选择一条需要编辑的数据行');
@@ -76,7 +76,7 @@
         }
 
         function del() {
-            var rows = $sysfuncTable.bootstrapTable('getSelections');
+            var rows = $funcTable.bootstrapTable('getSelections');
             if (rows.length === 0) {
                 jutils.warn('请选择需要删除的数据行');
                 return;
@@ -92,7 +92,7 @@
                     jutils.ajaxGet('/sysfunc/DelByIds',
                         { ids: ids.join() },
                         function() {
-                            $sysfuncTable.bootstrapTable('refresh');
+                            $funcTable.bootstrapTable('refresh');
                         });
                 });
         }
