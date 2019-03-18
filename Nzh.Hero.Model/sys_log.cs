@@ -15,7 +15,5 @@ namespace Nzh.Hero.Model
         public string logmsg { get; set; }
         public string loglevel { get; set; }
         public string logip { get; set; }
-
-
     }
 }
