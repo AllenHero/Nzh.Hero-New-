@@ -17,9 +17,9 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly ISysFuncService _funcService;
 
-        private readonly ILogService _logService;
+        private readonly ISysLogService _logService;
 
-        public SysFuncController(ISysFuncService funcService, ILogService logService)
+        public SysFuncController(ISysFuncService funcService, ISysLogService logService)
         {
             _funcService = funcService;
             _logService = logService;

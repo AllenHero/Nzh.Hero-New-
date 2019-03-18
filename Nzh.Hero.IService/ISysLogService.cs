@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Nzh.Hero.IService
 {
-    public interface ILogService 
+    public interface ISysLogService 
     {
 
         BootstrapGridDto GetData(BootstrapGridDto param);

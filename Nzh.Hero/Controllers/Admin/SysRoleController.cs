@@ -18,9 +18,9 @@ namespace Nzh.Hero.Controllers.Admin
 
         private readonly ISysRoleService _roleService;
 
-        private readonly ILogService _logService;
+        private readonly ISysLogService _logService;
 
-        public SysRoleController(ISysRoleService roleService,ILogService logService)
+        public SysRoleController(ISysRoleService roleService,ISysLogService logService)
         {
             _roleService = roleService;
             _logService = logService;

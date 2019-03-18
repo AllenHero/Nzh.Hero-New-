@@ -13,9 +13,9 @@ using System.Text;
 
 namespace Nzh.Hero.Service
 {
-    public class LogService : BaseService, ILogService
+    public class SysLogService : BaseService, ISysLogService
     {
-        public LogService(ISqlDbContext sqldb)
+        public SysLogService(ISqlDbContext sqldb)
            : base(sqldb)
         {
 

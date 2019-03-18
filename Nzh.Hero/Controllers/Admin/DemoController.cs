@@ -20,9 +20,9 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly IDemoService _demoService;
 
-        private readonly ILogService _logService;
+        private readonly ISysLogService _logService;
 
-        public DemoController(IDemoService demoService, ILogService logService) 
+        public DemoController(IDemoService demoService, ISysLogService logService) 
         {
             _demoService = demoService;
             _logService = logService;

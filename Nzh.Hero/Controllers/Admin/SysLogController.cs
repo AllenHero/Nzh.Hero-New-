@@ -19,9 +19,9 @@ namespace Nzh.Hero.Controllers.Admin
     public class SysLogController : BaseController
     {
 
-        private readonly ILogService _logService;
+        private readonly ISysLogService _logService;
 
-        public SysLogController(ILogService logService) 
+        public SysLogController(ISysLogService logService) 
         {
             _logService = logService;
         }

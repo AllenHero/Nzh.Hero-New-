@@ -19,9 +19,9 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly ISysAreaService _areaService;
 
-        private readonly ILogService _logService;
+        private readonly ISysLogService _logService;
 
-        public SysAreaController(ISysAreaService areaService, ILogService logService)
+        public SysAreaController(ISysAreaService areaService, ISysLogService logService)
         {
             _areaService = areaService;
             _logService = logService;

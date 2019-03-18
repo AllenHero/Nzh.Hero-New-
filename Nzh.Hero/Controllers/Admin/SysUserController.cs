@@ -20,10 +20,10 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly ISysUserService _userService;
 
-        private readonly ILogService _logService;
+        private readonly ISysLogService _logService;
 
 
-        public SysUserController(ISysUserService userService, ILogService logService)
+        public SysUserController(ISysUserService userService, ISysLogService logService)
         {
             _userService = userService;
             _logService = logService;

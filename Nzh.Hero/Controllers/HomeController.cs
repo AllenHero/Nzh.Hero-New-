@@ -18,9 +18,9 @@ namespace Nzh.Hero.Controllers
     {
         private readonly ISysMenuService _menuService;
 
-        private readonly ILogService _logService;
+        private readonly ISysLogService _logService;
 
-        public HomeController(ISysMenuService menuService, ILogService logService)
+        public HomeController(ISysMenuService menuService, ISysLogService logService)
         {
             _menuService = menuService;
             _logService = logService;
