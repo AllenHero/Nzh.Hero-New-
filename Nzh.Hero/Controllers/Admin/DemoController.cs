@@ -33,10 +33,10 @@ namespace Nzh.Hero.Controllers.Admin
             return View();
         }
 
-        public ActionResult GetTestByIds(string id)
+        public ActionResult GetDemoByIds(string id)
         {
             var result = new ResultAdaptDto();
-            var data = _demoService.GetTestById(id);
+            var data = _demoService.GetDemoByIds(id);
             result.data.Add("model", data);
             _logService.WriteLog(LogType.OTHER, $"获取demo(" + id + ")", LogState.NORMAL);//写入日志
             return Content(result.ToJson());

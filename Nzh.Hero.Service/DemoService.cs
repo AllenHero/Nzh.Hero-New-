@@ -62,7 +62,7 @@ namespace Nzh.Hero.Service
             }
         }
 
-        public demo GetTestById(string id)
+        public demo GetDemoByIds(string id)
         {
             return Sqldb.Queryable<demo>().Where(s => s.id == SqlFunc.ToInt64(id)).First();
         }

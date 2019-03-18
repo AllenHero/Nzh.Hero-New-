@@ -1,4 +1,5 @@
-﻿using Nzh.Hero.Core.DbContext;
+﻿using Nzh.Hero.Common.Snowflake;
+using Nzh.Hero.Core.DbContext;
 using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service.Base;
@@ -118,6 +119,24 @@ namespace Nzh.Hero.Service
                 pid = 52;
             }
             return Sqldb.Queryable<sys_citys>().Where(s => s.province_code == pid && s.city_level == 3).ToList();
+        }
+
+        public void InsertAreaData(sys_citys dto)
+        {
+            dto.id = IdWorkerHelper.NewId();
+            dto.zipcode = dto.zipcode;
+            dto.name = dto.name;
+            dto.name = dto.name ?? string.Empty;
+            dto.province_code = dto.province_code;
+            dto.city_code = dto.city_code;
+            dto.city_level = dto.city_level;
+            Sqldb.Insertable(dto).ExecuteCommand();
+        }
+
+        public void UpdateAreaData(sys_citys dto)
+        {
+            dto.name = dto.name ?? string.Empty;
+            Sqldb.Updateable(dto).IgnoreColumns(s => new { s.zipcode, s.province_code,s.city_code,s.city_level }).ExecuteCommand();
         }
     }
 }

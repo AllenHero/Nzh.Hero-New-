@@ -25,5 +25,9 @@ namespace Nzh.Hero.IService
         void InitChildList(List<CitySelDto> list, CitySelDto node, long pId);
 
         List<sys_citys> GetCountys(long pid);
+
+        void InsertAreaData(sys_citys dto);
+
+        void UpdateAreaData(sys_citys dto);
     }
 }

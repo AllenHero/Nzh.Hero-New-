@@ -49,13 +49,29 @@ namespace Nzh.Hero.Controllers.Admin
             return Content(list.ToJson());
         }
 
-        public ActionResult GetDataById(string id)
+        public ActionResult GetAreaById(string id)
         {
             var result = new ResultAdaptDto();
             return Content(result.ToJson());
         }
 
-        public ActionResult DelDataByIds(string ids)
+        [HttpPost]
+        public ActionResult SaveData(sys_citys dto)
+        {
+            if (dto.id == 0)
+            {
+                _areaService.InsertAreaData(dto);
+                _logService.WriteLog(LogType.ADD, $"添加行政区域(" + dto.name + ")", LogState.NORMAL);//写入日志
+            }
+            else
+            {
+                _areaService.UpdateAreaData(dto);
+                _logService.WriteLog(LogType.EDIT, $"修改行政区域(" + dto.name + ")", LogState.NORMAL);//写入日志
+            }
+            return Success("保存成功");
+        }
+
+        public ActionResult DelAreaByIds(string ids)
         {
             _areaService.DelByIds(ids);
             _logService.WriteLog(LogType.DEL, $"删除行政区域(" + ids + ")", LogState.NORMAL);//写入日志

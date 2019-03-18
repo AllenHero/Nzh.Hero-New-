@@ -64,7 +64,7 @@
             var id = $("#id").val();
 
             if (id !== '') {
-                jutils.ajaxGet('/demo/GetTestByIds', { id: id }, function (res) {
+                jutils.ajaxGet('/demo/GetDemoByIds', { id: id }, function (res) {
                     $('#form').initFormData(res.data.model);
 
                 });
