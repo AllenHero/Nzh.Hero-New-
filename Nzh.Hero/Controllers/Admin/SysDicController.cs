@@ -102,22 +102,12 @@ namespace Nzh.Hero.Controllers.Admin
             result.data.Add("dicTree", data);
             _logService.WriteLog(LogType.OTHER, $"获取字典树结构", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
-        }
-
-        public ActionResult TreeView()
-        {
-            return View();
-        }
+        }   
 
         public ActionResult GetTreeGrid()
         {
             var list = _dicService.GetTreeGrid();
             return Content(list.ToJson());
-        }
-
-        public ActionResult FormTest()
-        {
-            return View();
         }
     }
 }

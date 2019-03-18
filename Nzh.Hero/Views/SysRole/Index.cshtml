@@ -114,7 +114,7 @@
         }
 
         function setrole(id,name) {
-            jutils.dialogForm('角色权限信息', '/sysrole/SetRoleAuthNew', { id:id,roleName:name},
+            jutils.dialogForm('角色权限信息', '/sysrole/SetRoleAuth', { id:id,roleName:name},
                 function() {
                     $roleTable.bootstrapTable('refresh');
                 });

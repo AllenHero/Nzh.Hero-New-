@@ -77,13 +77,7 @@ namespace Nzh.Hero.Controllers.Admin
             return Success("删除成功");
         }
 
-        public ActionResult SetRoleAuth(string id)
-        {
-            ViewBag.Id = id;
-            return View();
-        }
-
-        public ActionResult SetRoleAuthNew(string id, string roleName)
+        public ActionResult SetRoleAuth(string id, string roleName)
         {
             ViewBag.Id = id;
             ViewBag.RoleName = roleName;

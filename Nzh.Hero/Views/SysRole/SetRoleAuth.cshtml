@@ -1,118 +1,104 @@
 ﻿
 @{
     ViewBag.Title = "设置菜单权限";
-    Layout = null;
+    Layout = "_Form";
 }
 
-<div class="bjui-pageContent" style="top: 0px; bottom: 35px;">
+<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
+<div class="row" id="content-main">
+    <div class="ibox-content">
+    <blockquote>
+        <p>当前角色:@(ViewBag.RoleName)</p>
+    </blockquote>
     <input type="hidden" id="roleId" value="@(ViewBag.Id)"/>
-    <div class="bs-example">
-        <div id="menuDiv" style="bottom: 30px;">
-            <table id="menuList" class="table table-bordered"></table>
-        </div>
+        <ul id="menuTree" class="ztree"></ul>
     </div>
 </div>
-<div class="bjui-pageFooter" style="bottom: 25px;">
-    <ul>
-        <li><button type="button" class="btn-close btn" data-icon="close"><i class="fa fa-close"></i> 关闭</button></li>
-        <li><button type="button" class="btn-default btn" data-icon="save" onclick="save();"><i class="fa fa-save"></i> 保存</button></li>
-    </ul>
+<div class="footer" style="height: 100px; ">
+    <div class="pull-right">
+        <button class="btn btn-primary" type="button" onclick="save()">保存设置</button>
+        <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+    </div>
 </div>
-<script>
-    $(function() {
-        loadGrid();
-        //loadData();
-        getallData();
-    });
+@section scripts
+    {
+<script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script>
+        var index = parent.layer.getFrameIndex(window.name);
+        var ptree = null;
+        $(function () {
+            loadMenuTree();
 
-    function loadGrid() {
-        $('#menuList').datagrid({
-            height: 400,
-            tableWidth: 500,
-            gridTitle: '菜单表格',
-            dataUrl: '/sysmenu/GetData',
-            filterThead: false,
-            columnFilter: false,
-            inlineEditMult: false,
-            showCheckboxcol: true,
-            paging: false,
-            isTree: 'MenuName',
-            treeOptions: {
-                expandAll: false,
-                add: false,
-                simpleData: true,
-                keys: {
-                    key: 'Id',
-                    parentKey: 'ParentId'
-                }
-            },
-            columns: [
-                { name: 'MenuName', label: '菜单名称', align: 'center' },
-                { name: 'MenuUrl', label: '菜单Url', align: 'center' },
-                { name: 'MenuSort', label: '排序', align: 'center' }
-            ],
-            // paging: { pageSize: 50, pageCurrent: 10 },
-            linenumberAll: true
         });
-    }
+        function loadMenuTree() {
+            var opts = {
+                data: {
+                    simpleData: {
+                        enable: true
+                    },
+                    key: {
+                        checked: 'checkstate'
+                    }
 
-    function getallData() {
-        //setTimeout(function () {
-        //    var data = $('#menuList').data('allData');
-
-        //    console.log(data);
-        //}, 2000);
-
-        //for (var i = 0; i < menuids.length; i++) {
-        //    $('#menuList').datagrid('selectedRows', menuids[i], true);
-        //}
-    }
-    function loadRoleData() {
-        var id = $.CurrentDialog.find("#roleId").val();
-        if (id !== '') {
-
-            jutils.ajaxGet('/sysrole/GetRoleAuthById', { roleId: id }, function (res) {
-                console.log(res.Data);
-
-                var menuids = res.Data;
-                if (menuids.length > 0) {
-                    //setInterval(function() {
-                    //    $('#menuList').datagrid('selectedRows', menuids, true);
-                    //}, 1000);
-                    setTimeout(function() {
-                        for (var i = 0; i < menuids.length; i++) {
-                            $('#menuList').datagrid('selectedRows', menuids[i], true);
-                        }
-                    },2000);
+                }, callback: {
+                    onClick: ZtreeClick
+                },
+                check: {
+                    enable: true,
+                    chkStyle: "checkbox",
+                    autoCheckTrigger: true,
+                    chkboxType: { "Y": "ps", "N": "ps" }
                 }
+            };
+
+            var roleId = $("#roleId").val();
+            jutils.ajaxGet('/SysRole/GetRoleMenuTree', { roleId: roleId }, function (res) {
+                ptree = $.fn.zTree.init($("#menuTree"), opts, res.data.roleMenu);
+                ptree.expandAll(true);
 
             });
         }
-    }
 
-    function save() {
-        var deom1 = $('#menuList').data('selectedTrs');
-        console.log(deom1);
-        return;
-        var ids = [];
-        var rows = $('#menuList').selectedRows();
-        if (rows.length > 0) {
-            //jutils.warn('选择一条数据行编辑');
-            //return;
-            for (var i = 0; i < rows.length; i++) {
+        //单击事件
+        function ZtreeClick(event, treeId, treeNode) {
+            var productId = treeNode.id;
+            //$('#j_datagrid').datagrid('filter', { pid: productId });
 
-                ids.push(rows[i].Id);
+        }
 
+
+        function save() {
+            var ids = [];
+            var nodes = ptree.getCheckedNodes(true);
+            if (nodes.length > 0) {
+                //jutils.warn('选择一条数据行编辑');
+                //return;
+                for (var i = 0; i < nodes.length; i++) {
+
+                    var newobj = {
+                        id: nodes[i].id,
+                        pId: nodes[i].pId
+                    }
+                    ids.push(newobj);
+
+                }
             }
-        }
-        var roleId = $.CurrentDialog.find("#roleId").val();
-        jutils.confirm('确认修改权限吗', function () {
-            jutils.ajaxPost('/sysrole/SaveRoleAuth', { roleId: roleId, ids: ids.join() }, function () {
-                jutils.info('设置完成');
+            var roleId = $("#roleId").val();
+            var rolemenus = JSON.stringify(ids);
+            //console.log(rolemenus);
+            jutils.confirm('确认修改权限吗', function () {
+                jutils.ajaxPost('/sysrole/SaveRoleAuth', { roleId: roleId, ids: rolemenus }, function () {
+                    jutils.success('设置完成');
+                    parent.layer.close(index);
+                });
             });
-        });
 
 
 
-    }
-</script>
+        }
+        function cancel() {
+            parent.layer.close(index);
+        }
+    </script>
+
+}
