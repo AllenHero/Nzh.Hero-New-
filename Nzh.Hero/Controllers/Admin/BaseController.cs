@@ -14,12 +14,10 @@ namespace Nzh.Hero.Controllers.Admin
     [WebExceptionFilter]
     public class BaseController : Controller
     {
-        //private readonly ILogService _logService;
 
-        //public BaseController(ILogService logService)
-        //{
-        //    _logService = logService;
-        //}
+        public BaseController()
+        {
+        }
 
         protected virtual ContentResult Success(string msg)
         {
@@ -40,13 +38,6 @@ namespace Nzh.Hero.Controllers.Admin
         {
             var result = new { statusCode = 300, msg = msg };
             return Content(result.ToJson());
-        }
-
-        [HttpPost]
-        public ActionResult WriteLog(sys_log dto)
-        {
-            //_logService.WriteLog(dto);
-            return Success("添加日志成功");
         }
     }
 }

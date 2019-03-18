@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Nzh.Hero.ViewModel.Enum
 {
-    public enum LogLevel
+    public enum LogState
     {
         NORMAL,
         WARN ,

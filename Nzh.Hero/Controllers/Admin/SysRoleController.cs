@@ -8,6 +8,7 @@ using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers.Admin
@@ -17,9 +18,12 @@ namespace Nzh.Hero.Controllers.Admin
 
         private readonly ISysRoleService _roleService;
 
-        public SysRoleController(ISysRoleService roleService)
+        private readonly ILogService _logService;
+
+        public SysRoleController(ISysRoleService roleService,ILogService logService)
         {
             _roleService = roleService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -37,6 +41,7 @@ namespace Nzh.Hero.Controllers.Admin
         {
             var data = new BootstrapGridDto();
             data = _roleService.GetData(param);
+            _logService.WriteLog(LogType.VIEW, $"查询角色", LogState.NORMAL);//写入日志
             return Content(data.ToJson());
         }
 
@@ -46,10 +51,12 @@ namespace Nzh.Hero.Controllers.Admin
             if (dto.id == 0)
             {
                 _roleService.InsertRoleData(dto);
+                _logService.WriteLog(LogType.ADD, $"添加角色(" + dto.role_name + ")", LogState.NORMAL);//写入日志
             }
             else
             {
                 _roleService.UpdateRoleData(dto);
+                _logService.WriteLog(LogType.EDIT, $"修改角色(" + dto.role_name + ")", LogState.NORMAL);//写入日志
             }
             return Success("保存成功");
         }
@@ -59,12 +66,14 @@ namespace Nzh.Hero.Controllers.Admin
             var result = new ResultAdaptDto();
             var data = _roleService.GetRoleById(id);
             result.data.Add("model", data);
+            _logService.WriteLog(LogType.OTHER, $"获取角色(" + id + ")", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 
         public ActionResult DelRoleByIds(string ids)
         {
             _roleService.DelRoleByIds(ids);
+            _logService.WriteLog(LogType.DEL, $"删除角色(" + ids + ")", LogState.NORMAL);//写入日志
             return Success("删除成功");
         }
 
@@ -92,6 +101,7 @@ namespace Nzh.Hero.Controllers.Admin
             var result = new ResultAdaptDto();
             var data = _roleService.GetRoleMenuTree(roleId);
             result.data.Add("roleMenu", data);
+            _logService.WriteLog(LogType.OTHER, $"获取角色(" + roleId + ")树结构", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 
@@ -100,6 +110,7 @@ namespace Nzh.Hero.Controllers.Admin
         {
             var result = new ResultAdaptDto();
             _roleService.SaveRoleAuth(roleId, ids);
+            _logService.WriteLog(LogType.OTHER, $"编辑角色(" + roleId + ")权限", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 

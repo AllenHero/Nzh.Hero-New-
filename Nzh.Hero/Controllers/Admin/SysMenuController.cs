@@ -8,6 +8,7 @@ using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers.Admin
@@ -16,9 +17,12 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly ISysMenuService _menuService;
 
-        public SysMenuController(ISysMenuService menuService)
+        private readonly ILogService _logService;
+
+        public SysMenuController(ISysMenuService menuService, ILogService logService)
         {
             _menuService = menuService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -39,6 +43,7 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult GetData()
         {
             var data = _menuService.GetMenuList();
+            _logService.WriteLog(LogType.VIEW, $"查询菜单", LogState.NORMAL);//写入日志
             return Content(data.ToJson());
         }
 
@@ -58,10 +63,12 @@ namespace Nzh.Hero.Controllers.Admin
             if (dto.id == 0)
             {
                 _menuService.AddMenu(dto, string.Empty);
+                _logService.WriteLog(LogType.ADD, $"添加菜单(" + dto.menu_name + ")", LogState.NORMAL);//写入日志
             }
             else
             {
                 _menuService.UpdateMenu(dto, string.Empty);
+                _logService.WriteLog(LogType.EDIT, $"修改菜单(" + dto.menu_name + ")", LogState.NORMAL);//写入日志
             }
             return Success("保存成功");
         }
@@ -76,6 +83,7 @@ namespace Nzh.Hero.Controllers.Admin
             var data = _menuService.GetMenuById(id);
             var result = new ResultAdaptDto();
             result.data.Add("model", data);
+            _logService.WriteLog(LogType.OTHER, $"获取菜单(" + id + ")", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 
@@ -87,6 +95,7 @@ namespace Nzh.Hero.Controllers.Admin
                 return Error("参数错误");
             }
             _menuService.DelByIds(ids);
+            _logService.WriteLog(LogType.DEL, $"删除菜单(" + ids + ")", LogState.NORMAL);//写入日志
             return Success("删除成功");
         }
     }

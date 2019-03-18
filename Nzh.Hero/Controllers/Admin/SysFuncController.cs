@@ -8,6 +8,7 @@ using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers.Admin
@@ -16,9 +17,12 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly ISysFuncService _funcService;
 
-        public SysFuncController(ISysFuncService funcService)
+        private readonly ILogService _logService;
+
+        public SysFuncController(ISysFuncService funcService, ILogService logService)
         {
             _funcService = funcService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -36,6 +40,7 @@ namespace Nzh.Hero.Controllers.Admin
         {
             var data = new BootstrapGridDto();
             data = _funcService.GetData(param);
+            _logService.WriteLog(LogType.VIEW, $"查询操作", LogState.NORMAL);//写入日志
             return Content(data.ToJson());
         }
 
@@ -44,10 +49,12 @@ namespace Nzh.Hero.Controllers.Admin
             if (dto.id == 0)
             {
                 _funcService.InsertFunc(dto);
+                _logService.WriteLog(LogType.ADD, $"添加操作(" + dto.func_cname + ")", LogState.NORMAL);//写入日志
             }
             else
             {
                 _funcService.UpdateFunc(dto);
+                _logService.WriteLog(LogType.EDIT, $"修改操作(" + dto.func_cname + ")", LogState.NORMAL);//写入日志
             }
             return Json("保存成功");
         }
@@ -57,12 +64,14 @@ namespace Nzh.Hero.Controllers.Admin
             var result = new ResultAdaptDto();
             var data = _funcService.GetFuncByIds(id);
             result.data.Add("model", data);
+            _logService.WriteLog(LogType.OTHER, $"获取操作(" + id + ")", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 
         public ActionResult DelByIds(string ids)
         {
             _funcService.DelByIds(ids);
+            _logService.WriteLog(LogType.DEL, $"删除操作(" + ids + ")", LogState.NORMAL);//写入日志
             return Success("删除成功");
         }
     }

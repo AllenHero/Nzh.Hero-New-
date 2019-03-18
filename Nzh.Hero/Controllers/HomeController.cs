@@ -9,6 +9,7 @@ using Nzh.Hero.Core.Web;
 using Nzh.Hero.IService;
 using Nzh.Hero.Models;
 using Nzh.Hero.Service;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers
@@ -17,9 +18,12 @@ namespace Nzh.Hero.Controllers
     {
         private readonly ISysMenuService _menuService;
 
-        public HomeController(ISysMenuService menuService)
+        private readonly ILogService _logService;
+
+        public HomeController(ISysMenuService menuService, ILogService logService)
         {
             _menuService = menuService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -43,6 +47,7 @@ namespace Nzh.Hero.Controllers
             var menu = await _menuService.GetRoleMenu();
             result.data.Add("menu", menu);
             result.data.Add("user", userDto);
+            _logService.WriteLog(LogType.OTHER, $"获取菜单", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 

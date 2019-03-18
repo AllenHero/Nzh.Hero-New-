@@ -27,7 +27,7 @@
     {
     <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
     <script>
-        var ptree, $dicTable;
+        var $ptree, $dicTable;
         $(function () {
             loadDicTree();
             loadGrid();
@@ -46,8 +46,8 @@
                 }
             };
             jutils.ajaxGet('/sysdic/getdicztree', null, function (res) {
-                ptree = $.fn.zTree.init($("#dicTree"), opts, res.data.dicTree);
-                ptree.expandAll(true);
+                $ptree = $.fn.zTree.init($("#dicTree"), opts, res.data.dicTree);
+                $ptree.expandAll(true);
             });
         }
 
@@ -86,7 +86,7 @@
         }
 
         function add() {
-            var node = ptree.getSelectedNodes();
+            var node = $ptree.getSelectedNodes();
             if (node.length === 0) {
                 jutils.warn("请先选择左侧通用字典项");
                 return;

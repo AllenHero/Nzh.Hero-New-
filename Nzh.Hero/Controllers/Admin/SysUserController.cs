@@ -11,6 +11,7 @@ using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers.Admin
@@ -19,9 +20,13 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly ISysUserService _userService;
 
-        public SysUserController(ISysUserService userService)
+        private readonly ILogService _logService;
+
+
+        public SysUserController(ISysUserService userService, ILogService logService)
         {
             _userService = userService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -48,6 +53,7 @@ namespace Nzh.Hero.Controllers.Admin
         {
             string accountName = RequestHelper.RequestGet("accountName", "");
             var data = _userService.GetData(param, accountName);
+            _logService.WriteLog(LogType.VIEW, $"查询用户", LogState.NORMAL);//写入日志
             return Content(data.ToJson());
         }
 
@@ -63,10 +69,12 @@ namespace Nzh.Hero.Controllers.Admin
             if (dto.id == 0)
             {
                 _userService.InsertData(dto);
+                _logService.WriteLog(LogType.ADD, $"添加用户(" + dto.account_name + ")", LogState.NORMAL);//写入日志
             }
             else
             {
                 _userService.UpdateData(dto);
+                _logService.WriteLog(LogType.EDIT, $"修改用户(" + dto.account_name + ")", LogState.NORMAL);//写入日志
             }
             return Success("保存成功");
         }
@@ -76,12 +84,14 @@ namespace Nzh.Hero.Controllers.Admin
             var result = new ResultAdaptDto();
             var data = _userService.GetUserById(id);
             result.data.Add("model", data);
+            _logService.WriteLog(LogType.OTHER, $"获取用户(" + id + ")", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 
         public ActionResult DelUserByIds(string ids)
         {
             _userService.DelUserByIds(ids);
+            _logService.WriteLog(LogType.DEL, $"添加用户(" + ids + ")", LogState.NORMAL);//写入日志
             return Success("删除成功");
         }
 
@@ -95,6 +105,7 @@ namespace Nzh.Hero.Controllers.Admin
         {
             dto.pass_word = Encrypt.DesEncrypt(dto.pass_word.Trim());
             _userService.UpdateProfile(dto);
+            _logService.WriteLog(LogType.OTHER, $"修改用户(" + dto.account_name + ")信息", LogState.NORMAL);//写入日志
             return Success("修改成功");
         }
     }

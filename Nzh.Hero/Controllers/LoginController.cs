@@ -9,6 +9,7 @@ using Nzh.Hero.Common.NLog;
 using Nzh.Hero.Core.Web;
 using Nzh.Hero.IService;
 using Nzh.Hero.Service;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers
@@ -17,9 +18,12 @@ namespace Nzh.Hero.Controllers
     {
         private readonly ISysUserService _userService;
 
-        public LoginController(ISysUserService userService)
+        private readonly ILogService _logService;
+
+        public LoginController(ISysUserService userService,ILogService logService)
         {
             _userService = userService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -60,13 +64,17 @@ namespace Nzh.Hero.Controllers
                     string claimstr = loginUserDto.ToJson();
                     CookieHelper.WriteLoginCookie(claimstr);
 
+                    _logService.WriteLog(LogType.LOGIN, $"登录成功", LogState.NORMAL);//写入日志
+
                     return Redirect("/Home");
+
                 }
                 ModelState.AddModelError("err", "用户名或密码错误");
             }
             catch (Exception e)
             {
                 LogNHelper.Exception(e);
+                _logService.WriteLog(LogType.LOGINFAIL, $"登录失败", LogState.ERROR);//写入日志
                 ModelState.AddModelError("err", "登录异常");
             }
             return View("Index", loginModel);
@@ -76,6 +84,7 @@ namespace Nzh.Hero.Controllers
         {
             HttpContext.SignOutAsync(LoginCookieDto.CookieScheme);
             CookieHelper.RemoveCooke();
+            _logService.WriteLog(LogType.OTHER, $"退出", LogState.NORMAL);//写入日志
             return RedirectToAction("Index", "Login");
         }
     }

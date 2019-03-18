@@ -11,6 +11,7 @@ using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers.Admin
@@ -19,9 +20,12 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly ISysDicService _dicService;
 
-        public SysDicController(ISysDicService dicService)
+        private readonly ILogService _logService;
+
+        public SysDicController(ISysDicService dicService, ILogService logService)
         {
             _dicService = dicService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -43,6 +47,7 @@ namespace Nzh.Hero.Controllers.Admin
         {
             var data = new BootstrapGridDto();
             var list = _dicService.GetData();
+            _logService.WriteLog(LogType.VIEW, $"查询字典", LogState.NORMAL);//写入日志
             return Content(data.ToJson());
         }
 
@@ -50,6 +55,7 @@ namespace Nzh.Hero.Controllers.Admin
         {
             string pid = RequestHelper.RequestGet("pid", "0");
             var list = _dicService.GetGridDataBypId(pid.ToInt64());
+            _logService.WriteLog(LogType.OTHER, $"获取字典详细信息", LogState.NORMAL);//写入日志
             return Content(list.ToJson());
         }
 
@@ -62,10 +68,12 @@ namespace Nzh.Hero.Controllers.Admin
             if (dto.id == 0)
             {
                 _dicService.InsertDicData(dto);
+                _logService.WriteLog(LogType.ADD, $"添加字典(" + dto.dic_name + ")", LogState.NORMAL);//写入日志
             }
             else
             {
                 _dicService.UpdateDicData(dto);
+                _logService.WriteLog(LogType.EDIT, $"修改字典(" + dto.dic_name + ")", LogState.NORMAL);//写入日志
             }
             return Success("保存成功");
         }
@@ -75,12 +83,14 @@ namespace Nzh.Hero.Controllers.Admin
             var result = new ResultAdaptDto();
             var data = _dicService.GetDicById(id);
             result.data.Add("model", data);
+            _logService.WriteLog(LogType.OTHER, $"获取字典(" + id + ")", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 
         public ActionResult del(string ids)
         {
             _dicService.DelByIds(ids);
+            _logService.WriteLog(LogType.DEL, $"删除字典(" + ids + ")", LogState.NORMAL);//写入日志
             return Success("删除成功");
         }
 
@@ -90,6 +100,7 @@ namespace Nzh.Hero.Controllers.Admin
             var data = _dicService.GetDicZtree();
             data.Insert(0, new ZtreeDto() { id = "0", name = "通用字典" });
             result.data.Add("dicTree", data);
+            _logService.WriteLog(LogType.OTHER, $"获取字典树结构", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 

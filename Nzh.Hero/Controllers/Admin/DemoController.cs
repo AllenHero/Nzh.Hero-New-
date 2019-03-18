@@ -11,6 +11,7 @@ using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
+using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
 
 namespace Nzh.Hero.Controllers.Admin
@@ -19,9 +20,12 @@ namespace Nzh.Hero.Controllers.Admin
     {
         private readonly IDemoService _demoService;
 
-        public DemoController(IDemoService demoService)
+        private readonly ILogService _logService;
+
+        public DemoController(IDemoService demoService, ILogService logService) 
         {
             _demoService = demoService;
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -34,6 +38,7 @@ namespace Nzh.Hero.Controllers.Admin
             var result = new ResultAdaptDto();
             var data = _demoService.GetTestById(id);
             result.data.Add("model", data);
+            _logService.WriteLog(LogType.OTHER, $"获取demo(" + id + ")", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
 
@@ -46,6 +51,7 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult GetData(BootstrapGridDto param)
         {
             var data = _demoService.GetData(param);
+            _logService.WriteLog(LogType.VIEW, $"查询demo", LogState.NORMAL);//写入日志
             return Content(data.ToJson());
         }
 
@@ -55,10 +61,12 @@ namespace Nzh.Hero.Controllers.Admin
             if (dto.id == 0)
             {
                 _demoService.InsertData(dto);
+                _logService.WriteLog(LogType.ADD, $"添加demo(" + dto.name + ")", LogState.NORMAL);//写入日志
             }
             else
             {
                 _demoService.UpdateData(dto);
+                _logService.WriteLog(LogType.EDIT, $"修改demo(" + dto.name + ")", LogState.NORMAL);//写入日志
             }
             return Success("保存成功");
         }
@@ -66,6 +74,7 @@ namespace Nzh.Hero.Controllers.Admin
         public ActionResult DelUserByIds(string ids)
         {
             _demoService.DelUserByIds(ids);
+            _logService.WriteLog(LogType.DEL, $"删除demo(" + ids + ")", LogState.NORMAL);//写入日志
             return Success("删除成功");
         }
     }

@@ -19,6 +19,7 @@ namespace Nzh.Hero.Extension
             builder.RegisterType<SysMenuService>().As<ISysMenuService>().InstancePerLifetimeScope();
             builder.RegisterType<SysRoleService>().As<ISysRoleService>().InstancePerLifetimeScope();
             builder.RegisterType<DemoService>().As<IDemoService>().InstancePerLifetimeScope();
+            builder.RegisterType<LogService>().As<ILogService>().InstancePerLifetimeScope();
 
             builder.RegisterType<SqlDbContext>().As<ISqlDbContext>().InstancePerLifetimeScope();
 

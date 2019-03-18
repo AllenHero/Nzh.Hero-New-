@@ -17,9 +17,11 @@
                 <div id="toolbar" class="btn-group">
 
                 </div>
-                <table id="areaTable"></table>
+                <div class="jqGrid_wrapper">
+                    <table id="areaTable"></table>
+                </div>
+                </div>
             </div>
-        </div>
     </div>
 </div>
 @section scripts
@@ -92,7 +94,7 @@
         function add() {
 
             jutils.dialogForm('字典信息',
-                '/sysdic/formtest',
+                '/sysarea/form',
                 null,
                 function() {
 
@@ -104,7 +106,7 @@
             if (rows.length === 1) {
                 var pid = rows[0].parent_id;
                 jutils.dialogForm('字典信息',
-                    '/sysdic/form',
+                    '/sysarea/form',
                     { id: rows[0].id },
                     function() {
                         $table.bootstrapTable('refresh', { query: { pid: pid } });
@@ -132,7 +134,7 @@
 
             jutils.confirm('确认删除吗',
                 function() {
-                    jutils.ajaxGet('/sysdic/del',
+                    jutils.ajaxGet('/sysarea/del',
                         { ids: ids.join() },
                         function() {
                             $table.bootstrapTable('refresh');

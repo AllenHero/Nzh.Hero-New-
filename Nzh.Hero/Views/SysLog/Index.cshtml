@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "日志管理";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+               
+                <div class="jqGrid_wrapper">
+                    <table id="logTable"></table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        var $logTable;
+        $(function() {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $logTable=$("#logTable").bootstrapTable({
+                url: '/syslog/getdata',
+                toolbar: '#toolbar',       
+                pagination: true,
+                height: $(window).height()-50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true, 
+                sidePagination: "server", 
+                locale: "zh-CN",
+                striped: true,
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'Operation', title: '操作人', align: 'center' },
+                    { field: 'LogTime', title: '操作时间', align: 'center'  },
+                    { field: 'LogtType', title: '操作类型', align: 'center'  },
+                    { field: 'LogMsg', title: '操作信息', align: 'center' },
+                    { field: 'LogLevel', title: '操作状态', align: 'center' },
+                    { field: 'LogIP', title: '操作IP', align: 'center' }
+                ]
+                
+            });  
+            jutils.initToolBar('#toolbar', true);
+        }
+    </script>
+}
