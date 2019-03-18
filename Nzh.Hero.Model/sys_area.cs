@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nzh.Hero.Model
 {
-    public class sys_citys
+    public class sys_area
     {
         [SugarColumn(IsPrimaryKey = true)]
         public long id { get; set; }

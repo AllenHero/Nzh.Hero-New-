@@ -16,7 +16,7 @@ namespace Nzh.Hero.IService
 
         bool IsExist(int areaCode, long id);
 
-        sys_citys GetAreaById(string id);
+        sys_area GetAreaById(string id);
 
         void DelByIds(string ids);
 
@@ -24,10 +24,10 @@ namespace Nzh.Hero.IService
 
         void InitChildList(List<CitySelDto> list, CitySelDto node, long pId);
 
-        List<sys_citys> GetCountys(long pid);
+        List<sys_area> GetCountys(long pid);
 
-        void InsertAreaData(sys_citys dto);
+        void InsertAreaData(sys_area dto);
 
-        void UpdateAreaData(sys_citys dto);
+        void UpdateAreaData(sys_area dto);
     }
 }

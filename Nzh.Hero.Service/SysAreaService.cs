@@ -24,7 +24,7 @@ namespace Nzh.Hero.Service
         public List<CityTreeDto> GetData(long pid)
         {
             var list = new List<CityTreeDto>();
-            var query = Sqldb.Queryable<sys_citys>().Where(s => s.province_code == pid).ToList();
+            var query = Sqldb.Queryable<sys_area>().Where(s => s.province_code == pid).ToList();
             list = query.Where(s => s.city_code == 0)
                 .Select(s => new CityTreeDto() { name = s.name, pid = s.city_code, zipcode = s.zipcode }).ToList();
             var cunty = query.Where(s => s.city_level == 3)
@@ -35,7 +35,7 @@ namespace Nzh.Hero.Service
 
         public List<ZtreeDto> GetProvince()
         {
-            var query = Sqldb.Queryable<sys_citys>().Where(s => s.province_code == 0)
+            var query = Sqldb.Queryable<sys_area>().Where(s => s.province_code == 0)
                 .Select(s => new ZtreeDto() { id = s.zipcode.ToString(), name = s.name, pId = "0" }).ToList();
             return query;
         }
@@ -45,7 +45,7 @@ namespace Nzh.Hero.Service
             bool codeCount = false;
             if (id == 0)
             {
-                var count = Sqldb.Queryable<sys_citys>().Where(s => s.zipcode == areaCode).Count();
+                var count = Sqldb.Queryable<sys_area>().Where(s => s.zipcode == areaCode).Count();
                 if (count > 0)
                 {
                     codeCount = true;
@@ -53,7 +53,7 @@ namespace Nzh.Hero.Service
             }
             else
             {
-                var count = Sqldb.Queryable<sys_citys>().Where(s => s.zipcode == areaCode && s.id != id).Count();
+                var count = Sqldb.Queryable<sys_area>().Where(s => s.zipcode == areaCode && s.id != id).Count();
                 if (count > 0)
                 {
                     codeCount = true;
@@ -62,9 +62,9 @@ namespace Nzh.Hero.Service
             return codeCount;
         }
 
-        public sys_citys GetAreaById(string id)
+        public sys_area GetAreaById(string id)
         {
-            return Sqldb.Queryable<sys_citys>().Where(s => s.id == SqlFunc.ToInt64(id)).First();
+            return Sqldb.Queryable<sys_area>().Where(s => s.id == SqlFunc.ToInt64(id)).First();
         }
 
         public void DelByIds(string ids)
@@ -72,14 +72,14 @@ namespace Nzh.Hero.Service
             if (!string.IsNullOrEmpty(ids))
             {
                 var idsArray = ids.Split(',');
-                Sqldb.Deleteable<sys_citys>().In(idsArray).ExecuteCommand();
+                Sqldb.Deleteable<sys_area>().In(idsArray).ExecuteCommand();
             }
         }
 
         public List<CitySelDto> GetCitySel()
         {
             var data = new List<CitySelDto>();
-            var list = Sqldb.Queryable<sys_citys>().OrderBy(s => s.zipcode).Select(s => new CitySelDto() { Id = s.id, Name = s.name, ParentId = s.province_code }).ToList();
+            var list = Sqldb.Queryable<sys_area>().OrderBy(s => s.zipcode).Select(s => new CitySelDto() { Id = s.id, Name = s.name, ParentId = s.province_code }).ToList();
             var fdata = list.Where(s => s.ParentId == 0).ToList();
             foreach (var item in fdata)
             {
@@ -112,16 +112,16 @@ namespace Nzh.Hero.Service
             }
         }
 
-        public List<sys_citys> GetCountys(long pid)
+        public List<sys_area> GetCountys(long pid)
         {
             if (pid == 0)
             {
                 pid = 52;
             }
-            return Sqldb.Queryable<sys_citys>().Where(s => s.province_code == pid && s.city_level == 3).ToList();
+            return Sqldb.Queryable<sys_area>().Where(s => s.province_code == pid && s.city_level == 3).ToList();
         }
 
-        public void InsertAreaData(sys_citys dto)
+        public void InsertAreaData(sys_area dto)
         {
             dto.id = IdWorkerHelper.NewId();
             dto.zipcode = dto.zipcode;
@@ -133,7 +133,7 @@ namespace Nzh.Hero.Service
             Sqldb.Insertable(dto).ExecuteCommand();
         }
 
-        public void UpdateAreaData(sys_citys dto)
+        public void UpdateAreaData(sys_area dto)
         {
             dto.name = dto.name ?? string.Empty;
             Sqldb.Updateable(dto).IgnoreColumns(s => new { s.zipcode, s.province_code,s.city_code,s.city_level }).ExecuteCommand();

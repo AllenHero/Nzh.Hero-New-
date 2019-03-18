@@ -56,7 +56,7 @@ namespace Nzh.Hero.Controllers.Admin
         }
 
         [HttpPost]
-        public ActionResult SaveData(sys_citys dto)
+        public ActionResult SaveData(sys_area dto)
         {
             if (dto.id == 0)
             {

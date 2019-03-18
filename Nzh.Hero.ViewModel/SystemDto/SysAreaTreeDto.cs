@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nzh.Hero.ViewModel.SystemDto
 {
-    public class SysAreaTreeDto : sys_citys
+    public class SysAreaTreeDto : sys_area
     {
         public List<SysAreaTreeDto> children { get; set; }
     }
