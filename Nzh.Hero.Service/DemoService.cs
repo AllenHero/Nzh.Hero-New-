@@ -38,7 +38,7 @@ namespace Nzh.Hero.Service
             dto.create_time = DateTime.Now;
             dto.create_person = UserCookie.AccountName;
             dto.name = dto.name ?? string.Empty;
-            dto.sex = dto.sex ?? string.Empty;
+            dto.sex = dto.sex ?? string.Empty;                                                       
             dto.age = dto.age ;
             dto.remark = dto.remark ?? string.Empty;
             Sqldb.Insertable(dto).ExecuteCommand();
