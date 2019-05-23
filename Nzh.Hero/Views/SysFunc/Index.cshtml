@@ -65,7 +65,7 @@
             //console.log(rows);
             if (rows.length === 1) {
                 // console.log(rows);
-                jutils.dialogForm('管理管理', '/sysfunc/form', {id:rows[0].Id},
+                jutils.dialogForm('操作管理', '/sysfunc/form', {id:rows[0].Id},
                     function() {
                         $funcTable.bootstrapTable('refresh');
                     });
