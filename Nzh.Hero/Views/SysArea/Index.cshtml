@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-2">
             <div class="ibox ">
-                <ul id="pTree" class="ztree"></ul>
+                <ul id="areaTree" class="ztree"></ul>
             </div>
         </div>
         <div class="col-sm-10">
@@ -32,12 +32,12 @@
     <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
     <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
     <script>
-        var $table,$ptree;
+        var $areaTable,$ptree;
         $(function () {
-            loadpTree();
+            loadAreaTree();
             loadGrid();
         });
-        function loadpTree() {
+        function loadAreaTree() {
             var opts = {
 
                 data: {
@@ -45,25 +45,25 @@
                         enable: true
                     }
                 }, callback: {
-                    onClick: DicZtreeClick
+                    onClick: AreaZtreeClick
 
                 }
             };
             jutils.ajaxGet('/sysarea/getprovince', null, function (res) {
-                $ptree = $.fn.zTree.init($("#pTree"), opts, res.data.list);
+                $ptree = $.fn.zTree.init($("#areaTree"), opts, res.data.list);
                 $ptree.expandAll(true);
             });
         }
         //单击事件
-        function DicZtreeClick(event, treeId, treeNode) {
+        function AreaZtreeClick(event, treeId, treeNode) {
             var pid = treeNode.id;
 
-            $table.bootstrapTable('refresh', { query: { pid: pid }});
+            $areaTable.bootstrapTable('refresh', { query: { pid: pid }});
 
         }
         function loadGrid() {
 
-            $table = $("#areaTable").bootstrapTable({
+            $areaTable = $("#areaTable").bootstrapTable({
                 url: '/sysarea/GetData',
                 height: $(window).height(),
                 striped: true,
@@ -78,7 +78,7 @@
                 treeShowField: 'name',
                 parentIdField: 'pid',
                 onLoadSuccess: function(data) {
-                    $table.treegrid({
+                    $areaTable.treegrid({
                         // initialState: 'collapsed',
                         treeColumn: 1,
                         // expanderExpandedClass: 'glyphicon glyphicon-minus',
@@ -94,25 +94,31 @@
         }
 
         function add() {
-
-            jutils.dialogForm('字典信息',
-                '/sysarea/form',
-                null,
-                function() {
-
+         var node = $ptree.getSelectedNodes();
+            if (node.length === 0) {
+                jutils.warn("请先选择左侧区域项");
+                return;
+            }
+            jutils.dialogForm('区域信息','/sysarea/form',{ id:'',pid:id },
+                function () {
+                    $areaTable.bootstrapTable('refresh', { query: { pid: id } });
+                    if (id === '0') {
+                        loadAreaTree();
+                    }
                 });
         }
 
         function edit() {
-            var rows = $table.bootstrapTable('getSelections');
+            var rows = $areaTable.bootstrapTable('getSelections');
             if (rows.length === 1) {
                 var pid = rows[0].parent_id;
-                jutils.dialogForm('字典信息',
-                    '/sysarea/form',
-                    { id: rows[0].id },
-                    function() {
-                        $table.bootstrapTable('refresh', { query: { pid: pid } });
+                jutils.dialogForm('区域信息','/sysarea/form',{ id: rows[0].id },
+                    function () {
 
+                        $areaTable.bootstrapTable('refresh', { query: { pid: pid } });
+                         if (pid === '0') {
+                            loadAreaTree();
+                        }
                     });
             } else {
                 jutils.warn('请选择一条需要编辑的数据行');
@@ -121,12 +127,11 @@
         }
 
         function del() {
-            var rows = $table.bootstrapTable('getSelections');
+            var rows = $areaTable.bootstrapTable('getSelections');
             if (rows.length === 0) {
                 jutils.warn('请选中需要删除的数据行');
                 return;
             }
-
             var ids = [];
             for (var i = 0; i < rows.length; i++) {
 
@@ -139,8 +144,8 @@
                     jutils.ajaxGet('/sysarea/DelAreaByIds',
                         { ids: ids.join() },
                         function() {
-                            $table.bootstrapTable('refresh');
-
+                            $areaTable.bootstrapTable('refresh');
+                             loadAreaTree();
                         });
                 });
         }

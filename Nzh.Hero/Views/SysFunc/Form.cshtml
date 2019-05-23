@@ -56,7 +56,10 @@
 @section scripts{
     <script type="text/javascript">
         var index = parent.layer.getFrameIndex(window.name);
-        $(function () {
+    $(function () {
+
+        debugger
+
             $('#form').validator({
                 stopOnError: false,
                 timely: 2,
@@ -71,7 +74,7 @@
                 }
             });
 
-            //loadData();
+            loadData();
         });
 
         function loadData() {

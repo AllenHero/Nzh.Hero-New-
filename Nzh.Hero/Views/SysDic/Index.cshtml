@@ -131,8 +131,11 @@
 
             }
 
-            jutils.confirm('确认删除吗', function () {
-                jutils.ajaxGet('/sysdic/del', { ids: ids.join() }, function () {
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/sysdic/del',
+                        { ids: ids.join() },
+                        function () {
                     $dicTable.bootstrapTable('refresh');
                     loadDicTree();
                 });
