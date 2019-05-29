@@ -5,16 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mapster" Version="3.3.1" />
     <PackageReference Include="sqlSugarCore" Version="5.0.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Nzh.Hero.Core\Nzh.Hero.Core.csproj" />
     <ProjectReference Include="..\Nzh.Hero.IRepository\Nzh.Hero.IRepository.csproj" />
-    <ProjectReference Include="..\Nzh.Hero.IService\Nzh.Hero.IService.csproj" />
-    <ProjectReference Include="..\Nzh.Hero.Model\Nzh.Hero.Model.csproj" />
-    <ProjectReference Include="..\Nzh.Hero.ViewModel\Nzh.Hero.ViewModel.csproj" />
+    <ProjectReference Include="..\Nzh.Hero.Service\Nzh.Hero.Service.csproj" />
   </ItemGroup>
 
 </Project>

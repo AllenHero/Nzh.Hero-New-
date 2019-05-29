@@ -1,6 +1,7 @@
 ﻿using Nzh.Hero.Common.Security;
 using Nzh.Hero.Common.Snowflake;
 using Nzh.Hero.Core.DbContext;
+using Nzh.Hero.IRepository;
 using Nzh.Hero.IService;
 using Nzh.Hero.Model;
 using Nzh.Hero.Service.Base;
@@ -14,15 +15,18 @@ namespace Nzh.Hero.Service
 {
     public class DemoService : BaseService, IDemoService
     {
-        public DemoService(ISqlDbContext sqldb)
+        private readonly IDemoRepository _demoRepository;
+
+        public DemoService(ISqlDbContext sqldb,IDemoRepository demoRepository)
            : base(sqldb)
         {
-
+            _demoRepository = demoRepository;
         }
 
         public BootstrapGridDto GetData(BootstrapGridDto param)
         {
             var query = Sqldb.Queryable<demo>();
+            //var query = _demoRepository.GetList<demo>();
             int total = 0;
             var data = query.OrderBy(u => u.create_time, OrderByType.Desc)
                 .Select(u => new { Id = u.id, Name = u.name, Sex = u.sex, Age = u.age,Remark=u.remark, CreateTime = u.create_time,CreatePerson=u.create_person })
@@ -41,7 +45,8 @@ namespace Nzh.Hero.Service
             dto.sex = dto.sex ?? string.Empty;                                                       
             dto.age = dto.age ;
             dto.remark = dto.remark ?? string.Empty;
-            Sqldb.Insertable(dto).ExecuteCommand();
+            _demoRepository.Insert(dto);
+            //Sqldb.Insertable(dto).ExecuteCommand();
         }
 
         public void UpdateData(demo dto)

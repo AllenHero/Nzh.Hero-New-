@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Nzh.Hero.Core\Nzh.Hero.Core.csproj" />
     <ProjectReference Include="..\Nzh.Hero.IService\Nzh.Hero.IService.csproj" />
+    <ProjectReference Include="..\Nzh.Hero.Repository\Nzh.Hero.Repository.csproj" />
     <ProjectReference Include="..\Nzh.Hero.Service\Nzh.Hero.Service.csproj" />
   </ItemGroup>
 
