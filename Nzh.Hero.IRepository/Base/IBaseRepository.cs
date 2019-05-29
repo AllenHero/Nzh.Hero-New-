@@ -154,6 +154,8 @@ namespace Nzh.Hero.IRepository.Base
 
         List<T> GetList();
 
+        ISugarQueryable<T> Queryable<T>();
+
         Task<List<T>> GetListAsync();
 
         List<T> GetList(Expression<Func<T, bool>> whereExpression);

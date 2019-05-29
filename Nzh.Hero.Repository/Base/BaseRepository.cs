@@ -875,6 +875,15 @@ namespace Nzh.Hero.Repository.Base
         }
 
         /// <summary>
+        /// 查询
+        /// </summary>
+        /// <returns></returns>
+        public ISugarQueryable<T> Queryable<T>()
+        {
+            return Sqldb.Queryable<T>();
+        }
+
+        /// <summary>
         /// 获取List
         /// </summary>
         /// <returns></returns>
