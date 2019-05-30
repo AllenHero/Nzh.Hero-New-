@@ -31,8 +31,8 @@ namespace Nzh.Hero.Extension
             builder.RegisterType<SysRoleRepository>().As<ISysRoleRepository>().InstancePerLifetimeScope();
             builder.RegisterType<DemoRepository>().As<IDemoRepository>().InstancePerLifetimeScope();
             builder.RegisterType<SysLogRepository>().As<ISysLogRepository>().InstancePerLifetimeScope();
-
-            builder.RegisterType<SysLogService>().As<ISysLogService>().InstancePerLifetimeScope();
+            builder.RegisterType<SysMenuRefOperateRepository>().As<ISysMenuRefOperateRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SysRoleAuthorizeRepository>().As<ISysRoleAuthorizeRepository>().InstancePerLifetimeScope();
 
             builder.RegisterType<SqlDbContext>().As<ISqlDbContext>().InstancePerLifetimeScope();
 
