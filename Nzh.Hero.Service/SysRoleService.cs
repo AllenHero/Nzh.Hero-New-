@@ -21,8 +21,7 @@ namespace Nzh.Hero.Service
         private readonly ISysRoleAuthorizeRepository _sysroleauthorizeRepository;
         private readonly ISysMenuRepository _sysmenuRepository;
 
-        public SysRoleService(ISqlDbContext sqldb, ISysRoleRepository sysroleRepository, ISysRoleAuthorizeRepository sysroleauthorizeRepository, ISysMenuRepository sysmenuRepository)
-       : base(sqldb)
+        public SysRoleService(ISqlDbContext sqldb, ISysRoleRepository sysroleRepository, ISysRoleAuthorizeRepository sysroleauthorizeRepository, ISysMenuRepository sysmenuRepository): base(sqldb)
         {
             _sysroleRepository = sysroleRepository;
             _sysroleauthorizeRepository = sysroleauthorizeRepository;

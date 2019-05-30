@@ -15,8 +15,7 @@ namespace Nzh.Hero.Service
     {
         private readonly ISysDicRepository _sysdicRepository;
 
-        public SysDicService(ISqlDbContext sqldb, ISysDicRepository sysdicRepository)
-           : base(sqldb)
+        public SysDicService(ISqlDbContext sqldb, ISysDicRepository sysdicRepository): base(sqldb)
         {
             _sysdicRepository = sysdicRepository;
         }

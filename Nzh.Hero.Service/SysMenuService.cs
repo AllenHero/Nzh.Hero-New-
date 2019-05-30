@@ -23,8 +23,7 @@ namespace Nzh.Hero.Service
         private readonly ISysFuncRepository _sysfuncRepository;
         private readonly ISysRoleAuthorizeRepository _sysroleauthorizeRepository;
 
-        public SysMenuService(ISqlDbContext sqlContext, ISysMenuRepository sysmenuRepository, ISysMenuRefOperateRepository sysmenurefoperateRepository, ISysFuncRepository sysfuncRepository, ISysRoleAuthorizeRepository sysroleauthorizeRepository)
-           : base(sqlContext)
+        public SysMenuService(ISqlDbContext sqlContext, ISysMenuRepository sysmenuRepository, ISysMenuRefOperateRepository sysmenurefoperateRepository, ISysFuncRepository sysfuncRepository, ISysRoleAuthorizeRepository sysroleauthorizeRepository): base(sqlContext)
         {
             _sysmenuRepository = sysmenuRepository;
             _sysmenurefoperateRepository = sysmenurefoperateRepository;

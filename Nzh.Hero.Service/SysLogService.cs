@@ -18,8 +18,7 @@ namespace Nzh.Hero.Service
     {
         private readonly ISysLogRepository _syslogRepository;
 
-        public SysLogService(ISqlDbContext sqldb, ISysLogRepository syslogRepository)
-           : base(sqldb)
+        public SysLogService(ISqlDbContext sqldb, ISysLogRepository syslogRepository): base(sqldb)
         {
             _syslogRepository = syslogRepository;
         }

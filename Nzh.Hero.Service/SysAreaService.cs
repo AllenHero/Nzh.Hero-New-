@@ -18,8 +18,7 @@ namespace Nzh.Hero.Service
     {
         private readonly ISysAreaRepository _sysareaRepository;
 
-        public SysAreaService(ISqlDbContext sqldb,ISysAreaRepository sysareaRepository)
-            : base(sqldb)
+        public SysAreaService(ISqlDbContext sqldb,ISysAreaRepository sysareaRepository): base(sqldb)
         {
             _sysareaRepository = sysareaRepository;
         }

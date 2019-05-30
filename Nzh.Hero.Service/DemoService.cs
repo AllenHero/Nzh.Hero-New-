@@ -18,8 +18,7 @@ namespace Nzh.Hero.Service
     {
         private readonly IDemoRepository _demoRepository;
 
-        public DemoService(ISqlDbContext sqldb,IDemoRepository demoRepository)
-           : base(sqldb)
+        public DemoService(ISqlDbContext sqldb,IDemoRepository demoRepository): base(sqldb)
         {
             _demoRepository = demoRepository;
         }
@@ -27,7 +26,7 @@ namespace Nzh.Hero.Service
         public BootstrapGridDto GetData(BootstrapGridDto param)
         {
             var query = _demoRepository.Queryable<demo>();
-            //var query = Sqldb.Queryable<demo>();
+            //var query = _sqldb.Queryable<demo>();
             int total = 0;
             var data = query.OrderBy(u => u.create_time, OrderByType.Desc).Select(u => new { Id = u.id, Name = u.name, Sex = u.sex, Age = u.age, Remark = u.remark, CreateTime = u.create_time, CreatePerson = u.create_person }).ToPageList(param.page, param.limit, ref total);
             param.rows = data;
