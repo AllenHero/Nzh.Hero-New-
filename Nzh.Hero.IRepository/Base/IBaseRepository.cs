@@ -10,11 +10,16 @@ namespace Nzh.Hero.IRepository.Base
 {
     public interface IBaseRepository<T> where T : class
     {
+        #region  事务
         void BeginTran();
 
         void CommitTran();
 
         void RollbackTran();
+
+        #endregion
+
+        #region    Sql
 
         List<T> GetListBySql(string Sql);
 
@@ -112,6 +117,10 @@ namespace Nzh.Hero.IRepository.Base
 
         Task<dynamic> GetDynamicAsync(string Sql, List<SugarParameter> parameters);
 
+        #endregion
+
+        #region 其他
+
         DataTable QueryProcedure(string procedureName, List<SugarParameter> parameters);
 
         Task<DataTable> QueryProcedureAsync(string procedureName, List<SugarParameter> parameters);
@@ -148,6 +157,10 @@ namespace Nzh.Hero.IRepository.Base
 
         Task<bool> IsAnyAsync(Expression<Func<T, bool>> whereExpression);
 
+        #endregion
+
+        #region  查询
+
         T GetById(dynamic id);
 
         Task<T> GetByIdAsync(dynamic id);
@@ -182,6 +195,10 @@ namespace Nzh.Hero.IRepository.Base
 
         Task<List<T>> GetPageListAsync(List<IConditionalModel> conditionalList, PageModel page, Expression<Func<T, object>> orderByExpression = null, OrderByType orderByType = OrderByType.Asc);
 
+        #endregion
+
+        #region  新增
+
         bool Insert(T insertObj);
 
         Task<bool> InsertAsync(T insertObj);
@@ -194,9 +211,13 @@ namespace Nzh.Hero.IRepository.Base
 
         Task<bool> InsertRangeAsync(T[] insertObjs);
 
-        bool InsertRange(List<T>[] insertObjs);
+        bool InsertRange(List<T> insertObjs);
 
-        Task<bool> InsertRangeAsync(List<T>[] insertObjs);
+        Task<bool> InsertRangeAsync(List<T> insertObjs);
+
+        #endregion
+
+        #region   修改
 
         bool Update(T updateObj);
 
@@ -206,13 +227,17 @@ namespace Nzh.Hero.IRepository.Base
 
         Task<bool> UpdateRangeAsync(T[] updateObjs);
 
-        bool UpdateRange(List<T>[] updateObjs);
+        bool UpdateRange(List<T> updateObjs);
 
-        Task<bool> UpdateRangeAsync(List<T>[] updateObjs);
+        Task<bool> UpdateRangeAsync(List<T> updateObjs);
 
         bool Update(Expression<Func<T, T>> columns, Expression<Func<T, bool>> whereExpression);
 
         Task<bool> UpdateAsync(Expression<Func<T, T>> columns, Expression<Func<T, bool>> whereExpression);
+
+        #endregion
+
+        #region  删除
 
         bool Delete(T deleteObj);
 
@@ -222,9 +247,9 @@ namespace Nzh.Hero.IRepository.Base
 
         Task<bool> DeleteAsync(T[] deleteObj);
 
-        bool Delete(List<T>[] deleteObj);
+        bool Delete(List<T> deleteObj);
 
-        Task<bool> DeleteAsync(List<T>[] deleteObj);
+        Task<bool> DeleteAsync(List<T> deleteObj);
 
         bool Delete(Expression<Func<T, bool>> whereExpression);
 
@@ -237,6 +262,8 @@ namespace Nzh.Hero.IRepository.Base
         bool DeleteByIds(dynamic[] ids);
 
         Task<bool> DeleteByIdsAsync(dynamic[] ids);
+
+        #endregion
 
     }
 }

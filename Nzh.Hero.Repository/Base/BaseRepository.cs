@@ -1122,7 +1122,7 @@ namespace Nzh.Hero.Repository.Base
         /// </summary>
         /// <param name="insertObjs"></param>
         /// <returns></returns>
-        public bool InsertRange(List<T>[] insertObjs)
+        public bool InsertRange(List<T> insertObjs)
         {
             return Sqldb.Insertable(insertObjs).ExecuteCommand() > 0;
         }
@@ -1132,7 +1132,7 @@ namespace Nzh.Hero.Repository.Base
         /// </summary>
         /// <param name="insertObjs"></param>
         /// <returns></returns>
-        public async Task<bool> InsertRangeAsync(List<T>[] insertObjs)
+        public async Task<bool> InsertRangeAsync(List<T> insertObjs)
         {
             return await Task.Run(() => Sqldb.Insertable(insertObjs).ExecuteCommand() > 0);
         }
@@ -1186,7 +1186,7 @@ namespace Nzh.Hero.Repository.Base
         /// </summary>
         /// <param name="updateObjs"></param>
         /// <returns></returns>
-        public bool UpdateRange(List<T>[] updateObjs)
+        public bool UpdateRange(List<T> updateObjs)
         {
             return Sqldb.Updateable(updateObjs).ExecuteCommand() > 0;
         }
@@ -1196,7 +1196,7 @@ namespace Nzh.Hero.Repository.Base
         /// </summary>
         /// <param name="updateObjs"></param>
         /// <returns></returns>
-        public async Task<bool> UpdateRangeAsync(List<T>[] updateObjs)
+        public async Task<bool> UpdateRangeAsync(List<T> updateObjs)
         {
             return await Task.Run(() => Sqldb.Updateable(updateObjs).ExecuteCommand() > 0);
         }
@@ -1272,7 +1272,7 @@ namespace Nzh.Hero.Repository.Base
         /// </summary>
         /// <param name="deleteObj"></param>
         /// <returns></returns>
-        public bool Delete(List<T>[] deleteObj)
+        public bool Delete(List<T> deleteObj)
         {
             return Sqldb.Deleteable<T>(deleteObj).ExecuteCommand() > 0;
         }
@@ -1282,7 +1282,7 @@ namespace Nzh.Hero.Repository.Base
         /// </summary>
         /// <param name="deleteObj"></param>
         /// <returns></returns>
-        public async Task<bool> DeleteAsync(List<T>[] deleteObj)
+        public async Task<bool> DeleteAsync(List<T> deleteObj)
         {
             return await Task.Run(() => Sqldb.Deleteable<T>(deleteObj).ExecuteCommand() > 0);
         }
