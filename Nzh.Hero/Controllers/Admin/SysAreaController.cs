@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Nzh.Hero.Common.Extends;
 using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.Core.Web;
 using Nzh.Hero.IService;
 using Nzh.Hero.Model;
-using Nzh.Hero.Service;
 using Nzh.Hero.ViewModel.Common;
 using Nzh.Hero.ViewModel.Enum;
 using Nzh.Hero.ViewModel.SystemDto;
+using System.Collections.Generic;
 
 namespace Nzh.Hero.Controllers.Admin
 {
@@ -112,5 +108,5 @@ namespace Nzh.Hero.Controllers.Admin
             _logService.WriteLog(LogType.VIEW, $"获取省份树结构", LogState.NORMAL);//写入日志
             return Content(result.ToJson());
         }
-    }                                                     
+    }
 }

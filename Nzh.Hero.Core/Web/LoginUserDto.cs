@@ -17,5 +17,6 @@ namespace Nzh.Hero.Core.Web
         public int UserLevel { get; set; }
         public long CompanyId { get; set; }
         public string CompanyName { get; set; }
+        public string IP { get; set; }
     }
 }

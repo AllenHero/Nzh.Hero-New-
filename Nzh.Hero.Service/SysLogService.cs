@@ -43,7 +43,8 @@ namespace Nzh.Hero.Service
             log.logtype = logtype.ToString();
             log.logmsg = logmsg;
             log.loglevel = logstate.ToString();
-            log.logip = "127.0.0.1";  //TODO
+            //log.logip = "127.0.0.1";  //TODO
+            log.logip = UserCookie.IP;
             //Sqldb.Insertable(log).ExecuteCommand();
             _syslogRepository.Insert(log);
         }

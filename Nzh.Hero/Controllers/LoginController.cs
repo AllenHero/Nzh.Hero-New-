@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Nzh.Hero.Common.IP;
 using Nzh.Hero.Common.JsonExt;
 using Nzh.Hero.Common.NLog;
 using Nzh.Hero.Core.Web;
@@ -61,6 +63,7 @@ namespace Nzh.Hero.Controllers
                     loginUserDto.County = user.county;
                     loginUserDto.UserLevel = user.user_level;
                     loginUserDto.SysRoleId = user.sys_role_id;
+                    loginUserDto.IP = IPHelper.GetLocalIp();  //登录IP
                     string claimstr = loginUserDto.ToJson();
                     CookieHelper.WriteLoginCookie(claimstr);
 
@@ -78,14 +81,6 @@ namespace Nzh.Hero.Controllers
                 ModelState.AddModelError("err", "登录异常");
             }
             return View("Index", loginModel);
-        }
-
-        public ActionResult LogOff()
-        {
-            HttpContext.SignOutAsync(LoginCookieDto.CookieScheme);
-            CookieHelper.RemoveCooke();
-            _logService.WriteLog(LogType.OTHER, $"退出", LogState.NORMAL);//写入日志
-            return RedirectToAction("Index", "Login");
         }
     }
 }

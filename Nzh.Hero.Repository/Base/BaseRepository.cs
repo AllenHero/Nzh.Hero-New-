@@ -1162,7 +1162,7 @@ namespace Nzh.Hero.Repository.Base
         }
 
         /// <summary>
-        /// 更新多实体
+        /// 更新实体
         /// </summary>
         /// <param name="updateObjs"></param>
         /// <returns></returns>
@@ -1172,7 +1172,7 @@ namespace Nzh.Hero.Repository.Base
         }
 
         /// <summary>
-        /// 更新多实体
+        /// 更新实体
         /// </summary>
         /// <param name="updateObjs"></param>
         /// <returns></returns>
@@ -1202,7 +1202,7 @@ namespace Nzh.Hero.Repository.Base
         }
 
         /// <summary>
-        /// 根据条件更新
+        /// 根据条件更新实体
         /// </summary>
         /// <param name="columns"></param>
         /// <param name="whereExpression"></param>
@@ -1213,7 +1213,7 @@ namespace Nzh.Hero.Repository.Base
         }
 
         /// <summary>
-        /// 根据条件更新
+        /// 根据条件更新实体
         /// </summary>
         /// <param name="columns"></param>
         /// <param name="whereExpression"></param>
@@ -1268,7 +1268,7 @@ namespace Nzh.Hero.Repository.Base
         }
 
         /// <summary>
-        /// 更新实体
+        /// 删除实体
         /// </summary>
         /// <param name="deleteObj"></param>
         /// <returns></returns>
@@ -1278,7 +1278,7 @@ namespace Nzh.Hero.Repository.Base
         }
 
         /// <summary>
-        /// 更新实体
+        /// 删除实体
         /// </summary>
         /// <param name="deleteObj"></param>
         /// <returns></returns>
