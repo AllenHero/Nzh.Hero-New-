@@ -82,5 +82,13 @@ namespace Nzh.Hero.Controllers
             }
             return View("Index", loginModel);
         }
+
+        public ActionResult LogOff()
+        {
+            HttpContext.SignOutAsync(LoginCookieDto.CookieScheme);
+            CookieHelper.RemoveCooke();
+            _logService.WriteLog(LogType.OTHER, $"退出", LogState.NORMAL);//写入日志
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
