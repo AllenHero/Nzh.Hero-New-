@@ -26,19 +26,11 @@ namespace Nzh.Hero.Service
         public BootstrapGridDto GetData(BootstrapGridDto param)
         {
             var query = _demoRepository.Queryable<demo>();
-            //var query = _sqldb.Queryable<demo>();
             int total = 0;
             var data = query.OrderBy(u => u.create_time, OrderByType.Desc).Select(u => new { Id = u.id, Name = u.name, Sex = u.sex, Age = u.age, Remark = u.remark, CreateTime = u.create_time, CreatePerson = u.create_person }).ToPageList(param.page, param.limit, ref total);
             param.rows = data;
             param.total = total;
             return param;
-
-            //PageModel pm = new PageModel() { PageIndex = param.page, PageSize = param.limit };
-            //Expression<Func<demo, bool>> expression = ex => ex.name == "11";
-            //dynamic data = _demoRepository.GetPageList(expression, pm);
-            //param.rows = data;
-            //param.total = pm.PageCount;
-            //return param;
         }    
 
         public void InsertData(demo dto)
@@ -51,7 +43,6 @@ namespace Nzh.Hero.Service
             dto.age = dto.age ;
             dto.remark = dto.remark ?? string.Empty;
             _demoRepository.Insert(dto);
-            //Sqldb.Insertable(dto).ExecuteCommand();
         }
 
         public void UpdateData(demo dto)
@@ -63,7 +54,6 @@ namespace Nzh.Hero.Service
             dto.remark = dto.remark ?? string.Empty;
             dto.create_person = demo.create_person ?? string.Empty;
             dto.create_time = demo.create_time;
-            //Sqldb.Updateable(dto).IgnoreColumns(s => new { s.create_person, s.create_time }).ExecuteCommand();
             _demoRepository.Update(dto);
         }
 
@@ -72,14 +62,12 @@ namespace Nzh.Hero.Service
             if (!string.IsNullOrEmpty(ids))
             {
                 var idsArray = ids.Split(',');
-                //Sqldb.Deleteable<demo>().In(idsArray).ExecuteCommand();
                 _demoRepository.DeleteById(idsArray);
             }
         }
 
         public demo GetDemoByIds(string id)
         {
-            //return Sqldb.Queryable<demo>().Where(s => s.id == SqlFunc.ToInt64(id)).First();
             return _demoRepository.GetById(id);
         }
     }

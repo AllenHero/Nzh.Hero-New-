@@ -26,7 +26,6 @@ namespace Nzh.Hero.Service
         public List<CityTreeDto> GetData(long pid)
         {
             var list = new List<CityTreeDto>();
-            //var query = Sqldb.Queryable<sys_area>().Where(s => s.province_code == pid).ToList();
             var query = _sysareaRepository.Queryable<sys_area>().Where(s => s.province_code == pid).ToList();
             list = query.Where(s => s.city_code == 0).Select(s => new CityTreeDto() { name = s.name, pid = s.city_code, zipcode = s.zipcode }).ToList();
             var cunty = query.Where(s => s.city_level == 3).Select(s => new CityTreeDto() { name = s.name, pid = s.city_code, zipcode = s.zipcode }).ToList();
@@ -36,7 +35,6 @@ namespace Nzh.Hero.Service
 
         public List<ZtreeDto> GetProvince()
         {
-            //var query = Sqldb.Queryable<sys_area>().Where(s => s.province_code == 0).Select(s => new ZtreeDto() { id = s.zipcode.ToString(), name = s.name, pId = "0" }).ToList();
             var query = _sysareaRepository.Queryable<sys_area>().Where(s => s.province_code == 0).Select(s => new ZtreeDto() { id = s.zipcode.ToString(), name = s.name, pId = "0" }).ToList();
             return query;
         }
@@ -46,7 +44,6 @@ namespace Nzh.Hero.Service
             bool codeCount = false;
             if (id == 0)
             {
-                //var count = Sqldb.Queryable<sys_area>().Where(s => s.zipcode == areaCode).Count();
                 var count = _sysareaRepository.Queryable<sys_area>().Where(s => s.zipcode == areaCode).Count();
                 if (count > 0)
                 {
@@ -55,7 +52,6 @@ namespace Nzh.Hero.Service
             }
             else
             {
-                //var count = Sqldb.Queryable<sys_area>().Where(s => s.zipcode == areaCode && s.id != id).Count();
                 var count = _sysareaRepository.Queryable<sys_area>().Where(s => s.zipcode == areaCode && s.id != id).Count();
                 if (count > 0)
                 {
@@ -67,7 +63,6 @@ namespace Nzh.Hero.Service
 
         public sys_area GetAreaById(string id)
         {
-            //return Sqldb.Queryable<sys_area>().Where(s => s.id == SqlFunc.ToInt64(id)).First();
             return _sysareaRepository.GetById(id);
         }
 
@@ -76,7 +71,6 @@ namespace Nzh.Hero.Service
             if (!string.IsNullOrEmpty(ids))
             {
                 var idsArray = ids.Split(',');
-                //Sqldb.Deleteable<sys_area>().In(idsArray).ExecuteCommand();
                 _sysareaRepository.DeleteById(idsArray);
             }
         }
@@ -84,7 +78,6 @@ namespace Nzh.Hero.Service
         public List<CitySelDto> GetCitySel()
         {
             var data = new List<CitySelDto>();
-            //var list = Sqldb.Queryable<sys_area>().OrderBy(s => s.zipcode).Select(s => new CitySelDto() { Id = s.id, Name = s.name, ParentId = s.province_code }).ToList();
             var list = _sysareaRepository.Queryable<sys_area>().OrderBy(s => s.zipcode).Select(s => new CitySelDto() { Id = s.id, Name = s.name, ParentId = s.province_code }).ToList();
             var fdata = list.Where(s => s.ParentId == 0).ToList();
             foreach (var item in fdata)
@@ -106,7 +99,6 @@ namespace Nzh.Hero.Service
 
         public void InitChildList(List<CitySelDto> list, CitySelDto node, long pId)
         {
-
             var parentList = list.Where(s => s.ParentId == pId).ToList();
             if (parentList.Any())
             {
@@ -124,7 +116,6 @@ namespace Nzh.Hero.Service
             {
                 pid = 52;
             }
-            //return Sqldb.Queryable<sys_area>().Where(s => s.province_code == pid && s.city_level == 3).ToList();
             return _sysareaRepository.Queryable<sys_area>().Where(s => s.province_code == pid && s.city_level == 3).ToList();
         }
 
@@ -137,7 +128,6 @@ namespace Nzh.Hero.Service
             dto.province_code = dto.province_code;
             dto.city_code = dto.city_code;
             dto.city_level = dto.city_level;
-            //Sqldb.Insertable(dto).ExecuteCommand();
             _sysareaRepository.Insert(dto);
         }
 
@@ -149,7 +139,6 @@ namespace Nzh.Hero.Service
             dto.province_code = sys_area.province_code;
             dto.city_code = sys_area.city_code;
             dto.city_level = sys_area.city_level;
-            //Sqldb.Updateable(dto).IgnoreColumns(s => new { s.zipcode, s.province_code,s.city_code,s.city_level }).ExecuteCommand();
             _sysareaRepository.Update(dto);
         }
     }
